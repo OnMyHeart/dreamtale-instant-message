@@ -1,0 +1,5 @@
+rootProject.name = 'dreamtale-instant-message'
+include "instant-message-api"
+include "instant-message-web"
+include "instant-message-service"
+include "instant-message-foreign"

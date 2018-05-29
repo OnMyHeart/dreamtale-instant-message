@@ -1,0 +1,32 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: "maven-publish"
+
+group = 'com.dreamtale'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// 发布包的文件名前缀
+def prjArtifactId = "bs-automini-promotion-api"
+
+jar {
+	baseName = prjArtifactId
+}
+
+repositories {
+	mavenCentral()
+}
+

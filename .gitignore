@@ -1,0 +1,13 @@
+.idea/
+logs/
+build/
+.class
+/.gradle/*
+/dreamtale-instant-message.iml
+.settings/
+.git/
+.gradle/
+.classpath
+.project
+gradlew
+gradlew.bat
