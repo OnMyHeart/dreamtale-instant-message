@@ -12,9 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @ServletComponentScan
 @EnableConfigurationProperties
 @EnableWebSecurity
-public class InstantMsgApplication {
+public class InstantMsgWebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InstantMsgApplication.class, args);
+		SpringApplication.run(InstantMsgWebApplication.class, args);
 	}
 }
