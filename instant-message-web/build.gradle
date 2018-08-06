@@ -34,6 +34,7 @@ dependencies {
 //	compile 'org.springframework.security:spring-security-web'
 //	compile 'org.springframework.security:spring-security-config'
 //	compile('org.springframework.boot:spring-boot-starter-security')
+	compile project(":instant-message-api")
 	compile('org.aspectj:aspectjrt:1.9.1')
 	compile('org.aspectj:aspectjweaver:1.9.1')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
