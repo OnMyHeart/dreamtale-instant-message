@@ -1,6 +1,6 @@
 //package com.dreamtale.dreamtale.instant.message.service;
 //
-//import com.dreamtale.dreamtale.instant.message.entity.message.MessageEntity;
+//import MessageEntity;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.redis.core.RedisTemplate;
 //import org.springframework.stereotype.Service;

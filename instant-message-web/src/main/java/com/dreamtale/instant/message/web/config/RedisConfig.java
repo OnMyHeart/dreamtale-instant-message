@@ -1,4 +1,4 @@
-package com.dreamtale.dreamtale.instant.message.config;
+package com.dreamtale.instant.message.web.config;
 
 import org.springframework.context.annotation.Configuration;
 

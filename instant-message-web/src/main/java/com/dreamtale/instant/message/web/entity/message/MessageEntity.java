@@ -1,4 +1,4 @@
-package com.dreamtale.dreamtale.instant.message.entity.message;
+package com.dreamtale.instant.message.web.entity.message;
 
 import java.io.Serializable;
 

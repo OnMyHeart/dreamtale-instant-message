@@ -2,10 +2,11 @@ server:
   port: 80
 spring:
   redis:
-    host: 192.168.51.93
+    host: redis.dreamtale.com
     port: 6379
   datasource:
-    username: root
-    password: Ys.123456
-    url: jdbc:mysql://192.168.51.93:3306/admin_auth?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
-    driver-class-name: com.mysql.jdbc.Driver
+    username: dev001
+    password: Dev.qwe123
+    name: dreamtale_user
+    url: jdbc:mysql://mysql.dreamtale.com:3306/dreamtale_user?useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    driver-class-name: com.mysql.cj.jdbc.Driver

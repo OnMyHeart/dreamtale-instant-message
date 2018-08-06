@@ -1,4 +1,4 @@
-package com.dreamtale.dreamtale.instant.message.auth;
+package com.dreamtale.instant.message.web.auth;
 
 import org.aspectj.lang.annotation.Aspect;
 

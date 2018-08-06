@@ -1,6 +1,6 @@
 //package com.dreamtale.dreamtale.instant.message.resource;
 //
-//import com.dreamtale.dreamtale.instant.message.entity.message.MessageEntity;
+//import MessageEntity;
 //import com.dreamtale.dreamtale.instant.message.service.ReceiveMessageService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestMapping;

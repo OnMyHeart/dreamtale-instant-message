@@ -1,4 +1,4 @@
-package com.dreamtale.dreamtale.instant.message.controller;
+package com.dreamtale.instant.message.web.controller;
 
 
 import org.springframework.stereotype.Controller;
