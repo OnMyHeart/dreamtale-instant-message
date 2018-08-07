@@ -1,6 +1,5 @@
 package com.dreamtale.instant.message.web.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,18 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("")
-public class LoginController {
+public class IndexController {
 
     /**
-     * 登录页面
-     * @param returnUrl 登陆后跳转的页面
+     * 首页
      * @param modelMap
      * @return
      */
-    @RequestMapping("/login")
-    public String loginHtml(String returnUrl, ModelMap modelMap){
-        modelMap.put("returnUrl", returnUrl);
-        return "/index/login";
+    @RequestMapping("/index")
+    public String loginHtml(ModelMap modelMap){
+        return "/index";
     }
 
 }

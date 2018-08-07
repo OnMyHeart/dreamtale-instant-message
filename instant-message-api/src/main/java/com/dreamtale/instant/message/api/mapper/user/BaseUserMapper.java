@@ -4,7 +4,7 @@ import com.dreamtale.instant.message.api.entity.user.BaseUser;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface BseUserMapper {
+public interface BaseUserMapper {
 
     int deleteByPrimaryKey(Long id);
 
