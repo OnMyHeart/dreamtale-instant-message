@@ -14,6 +14,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'application'
+
 
 group = 'com.dreamtale'
 version = '0.0.1-SNAPSHOT'
@@ -55,4 +57,18 @@ dependencies {
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
+}
+
+jar {
+	baseName = "instant-message-web"
+	version = "0.0.1-SNAPSHOT"
+	manifest {
+		attributes "Main-Class":"com.dreamtale.instant.message.web.InstantMsgWebApplication"
+	}
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+bootRepackage.enabled = false
+bootRepackage {
+	mainClass = "com.dreamtale.instant.message.web.InstantMsgWebApplication"
 }
