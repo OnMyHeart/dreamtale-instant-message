@@ -21,4 +21,14 @@ public class IndexController {
         return "/index";
     }
 
+    /**
+     * 首页
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping("/work")
+    public String work(ModelMap modelMap){
+        return "/work";
+    }
+
 }
