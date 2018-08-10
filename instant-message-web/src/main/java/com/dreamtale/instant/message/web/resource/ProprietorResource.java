@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
  * Created by yingshuai on 2018/8/9.
  */
 @RestController
-@RequestMapping("/proprietor")
+@RequestMapping("/admin/proprietor")
 @Produces(MediaType.APPLICATION_JSON)
 public class ProprietorResource {
 

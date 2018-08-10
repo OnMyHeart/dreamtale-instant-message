@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/receive/message")
+@RequestMapping("/admin/receive/message")
 public class ReceiveMessageResource {
 
     @Autowired

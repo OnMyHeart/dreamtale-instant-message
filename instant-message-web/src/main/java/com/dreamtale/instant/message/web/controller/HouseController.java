@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author dream
  */
 @Controller
-@RequestMapping("/house")
+@RequestMapping("/admin/house")
 public class HouseController {
 
     @RequestMapping("/list")

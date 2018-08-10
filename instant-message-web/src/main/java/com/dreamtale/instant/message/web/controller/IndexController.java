@@ -16,7 +16,7 @@ public class IndexController {
      * @param modelMap
      * @return
      */
-    @RequestMapping("/index")
+    @RequestMapping("/admin/index")
     public String loginHtml(ModelMap modelMap){
         return "index";
     }

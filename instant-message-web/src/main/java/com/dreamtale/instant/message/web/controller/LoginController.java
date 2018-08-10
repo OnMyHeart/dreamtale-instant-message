@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Author dream
  */
 @Controller
-@RequestMapping("")
+@RequestMapping("/admin")
 public class LoginController {
 
     /**
