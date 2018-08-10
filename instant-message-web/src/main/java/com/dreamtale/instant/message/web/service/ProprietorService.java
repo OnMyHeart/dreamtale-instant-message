@@ -1,6 +1,6 @@
 package com.dreamtale.instant.message.web.service;
 
-import com.dreamtale.instant.message.api.entity.user.BaseUser;
+import com.dreamtale.instant.message.api.entity.user.pojo.BaseUser;
 import com.dreamtale.instant.message.api.mapper.user.BaseUserMapper;
 import org.jfree.data.json.impl.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

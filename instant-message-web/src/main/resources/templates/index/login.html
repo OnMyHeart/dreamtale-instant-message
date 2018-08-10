@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8" />
         <title>梦境传说后台 - 登录</title>
@@ -13,19 +14,35 @@
         <!--[if lt IE 9]>
         <meta http-equiv="refresh" content="0;ie.html" />
         <![endif]-->
+        <script src="http://dreamtale.iok.la/static/admin/js/jquery.min.js?v=2.1.4"></script>
+        <script src="http://dreamtale.iok.la/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+        <script>
+            $(function () {
+                $("#login").on("click", function () {
+                    $.post("login",{"userName":$("#userName").val(),"userPassword":$("#userPassword").val()},function (data) {
+                        if(data.code==200){
+                            alert("登录成功！");
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+                });
+            });
+        </script>
     </head>
     <body class="signin">
         <div class="signinpanel">
             <div class="row">
                 <div class="col-sm-12">
-                    <form method="post" action="">
+                    <!--<form method="post" action="login">-->
                         <h4 class="no-margins">登录：</h4>
                         <p class="m-t-md">登录到梦境传说后台</p>
-                        <input type="text" class="form-control uname" placeholder="用户名" />
-                        <input type="password" class="form-control pword m-b" placeholder="密码" />
+                        <input id="userName" name="userName" type="text" class="form-control uname" placeholder="用户名" />
+                        <input id="userPassword" name="userPassword" type="password" class="form-control pword m-b" placeholder="密码" />
+                        <input type="hidden" th:value="${returnUrl}">
                         <a href="">忘记密码了？</a>
-                        <button class="btn btn-success btn-block">登录</button>
-                    </form>
+                        <button id="login" class="btn btn-success btn-block">登录</button>
+                    <!--</form>-->
                 </div>
             </div>
             <div class="signup-footer">

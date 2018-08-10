@@ -1,4 +1,4 @@
-package com.dreamtale.instant.message.api.entity.user;
+package com.dreamtale.instant.message.api.entity.user.pojo;
 
 import java.io.Serializable;
 import java.util.Date;

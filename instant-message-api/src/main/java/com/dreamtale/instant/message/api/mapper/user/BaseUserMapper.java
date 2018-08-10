@@ -1,6 +1,7 @@
 package com.dreamtale.instant.message.api.mapper.user;
 
-import com.dreamtale.instant.message.api.entity.user.BaseUser;
+import com.dreamtale.instant.message.api.entity.user.param.UserLoginParam;
+import com.dreamtale.instant.message.api.entity.user.pojo.BaseUser;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -17,5 +18,7 @@ public interface BaseUserMapper {
     int updateByPrimaryKeySelective(BaseUser record);
 
     int updateByPrimaryKey(BaseUser record);
+
+    int checkUserPassword(UserLoginParam userLoginParam);
 
 }
