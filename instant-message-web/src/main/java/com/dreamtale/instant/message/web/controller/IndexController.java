@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Author dream
  */
 @Controller
-@RequestMapping("")
+@RequestMapping("/admin")
 public class IndexController {
 
     /**
@@ -16,7 +16,7 @@ public class IndexController {
      * @param modelMap
      * @return
      */
-    @RequestMapping("/admin/index")
+    @RequestMapping("/index")
     public String loginHtml(ModelMap modelMap){
         return "index";
     }
