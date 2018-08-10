@@ -1,12 +1,16 @@
 subprojects {
     configurations {
         compile.exclude module: "spring-boot-starter-tomcat"
+        compile.exclude module: "jsr311-api"
     }
 
     apply plugin: 'java'
     apply plugin: 'idea'
 
     repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        maven { url "http://repo.springsource.org/plugins-release" }
+        jcenter()
         mavenCentral()
     }
 

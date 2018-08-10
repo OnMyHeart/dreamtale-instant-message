@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * 业主功能相关
+ * @author  yingshuai
  * Created by yingshuai on 2018/8/9.
  */
 @RestController
@@ -22,7 +23,7 @@ public class ProprietorResource {
     @Autowired
     ProprietorService proprietorService;
 
-    @GetMapping("/bachInsertProprietor")
+    @GetMapping("/batchInsertProprietor")
     public JSONObject batchInsertProprietor(){
         return proprietorService.batchInsertProprietor();
     }
