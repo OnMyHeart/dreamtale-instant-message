@@ -18,7 +18,7 @@ public class IndexController {
      */
     @RequestMapping("/index")
     public String loginHtml(ModelMap modelMap){
-        return "/index";
+        return "index";
     }
 
     /**
@@ -28,7 +28,7 @@ public class IndexController {
      */
     @RequestMapping("/work")
     public String work(ModelMap modelMap){
-        return "/work";
+        return "work";
     }
 
 }

@@ -21,7 +21,7 @@ public class LoginController {
     @RequestMapping("/login")
     public String loginHtml(String returnUrl, ModelMap modelMap){
         modelMap.put("returnUrl", returnUrl);
-        return "/index/login";
+        return "index/login";
     }
 
 }

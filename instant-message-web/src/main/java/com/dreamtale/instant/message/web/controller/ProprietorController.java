@@ -14,7 +14,7 @@ public class ProprietorController {
 
     @RequestMapping("/list")
     public String list(ModelMap modelMap){
-        return "/proprietor/list_proprietor";
+        return "proprietor/list_proprietor";
     }
 
 }
