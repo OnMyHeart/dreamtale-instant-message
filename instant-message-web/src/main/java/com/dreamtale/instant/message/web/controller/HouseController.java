@@ -14,7 +14,7 @@ public class HouseController {
 
     @RequestMapping("/list")
     public String list(ModelMap modelMap){
-        return "house/list_house";
+        return "house/list_house_new";
     }
 
 }
