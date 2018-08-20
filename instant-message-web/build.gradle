@@ -81,7 +81,7 @@ dependencies {
 //	compile "org.csource:fastdfs-client-java:5.0.4"
 //	dfs 文件上传
 //	https://mvnrepository.com/artifact/com.github.tobato/fastdfs-client
-	compile group: 'com.github.tobato', name: 'fastdfs-client', version: '1.26.2'
+//	compile group: 'com.github.tobato', name: 'fastdfs-client', version: '1.26.2'
 
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
