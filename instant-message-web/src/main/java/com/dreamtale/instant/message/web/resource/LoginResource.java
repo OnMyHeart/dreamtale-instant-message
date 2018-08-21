@@ -17,14 +17,14 @@ import javax.ws.rs.core.MediaType;
  *  登录相关接口
  */
 @RestController
-@RequestMapping("/admin/login")
+@RequestMapping("/admin")
 @Produces(MediaType.APPLICATION_JSON)
 public class LoginResource {
 
     @Autowired
     LoginService loginService;
 
-    @PostMapping("")
+    @PostMapping("/login")
     public ResultJson login(UserLoginParam userLoginParam){
         ResultJson resultJson = new ResultJson();
         boolean flag = loginService.login(userLoginParam);
