@@ -19,9 +19,9 @@
         <script>
             $(function () {
                 $("#login").on("click", function () {
-                    $.post("login",{"userName":$("#userName").val(),"userPassword":$("#userPassword").val()},function (data) {
+                    $.post("login",{"userName":$("#userName").val(), "userPassword":$("#userPassword").val()},function (data) {
                         if(data.code==200){
-                            alert("登录成功！");
+                            window.location.href = "index.html";
                         } else {
                             alert(data.message);
                         }

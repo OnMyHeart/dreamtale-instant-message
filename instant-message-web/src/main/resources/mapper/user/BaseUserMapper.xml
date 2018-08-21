@@ -174,7 +174,9 @@
     create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="checkUserPassword" parameterType="com.dreamtale.instant.message.api.entity.user.param.UserLoginParam" resultType="java.lang.Integer">
-    SELECT  count(id) FROM base_user WHERE user_name=#{userName, jdbcType=VARCHAR} AND user_password = #{userPassword,jdbcType=VARCHAR}
+  <select id="checkUserPassword" parameterType="com.dreamtale.instant.message.api.entity.user.param.UserLoginParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM base_user WHERE user_name=#{userName, jdbcType=VARCHAR} AND user_password = #{userPassword,jdbcType=VARCHAR} limit 1
   </select>
 </mapper>

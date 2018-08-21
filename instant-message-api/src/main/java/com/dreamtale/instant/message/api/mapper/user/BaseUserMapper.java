@@ -19,6 +19,6 @@ public interface BaseUserMapper {
 
     int updateByPrimaryKey(BaseUser record);
 
-    int checkUserPassword(UserLoginParam userLoginParam);
+    BaseUser checkUserPassword(UserLoginParam userLoginParam);
 
 }

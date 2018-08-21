@@ -3,12 +3,15 @@ package com.dreamtale.instant.message.web.resource;
 import com.dreamtale.instant.message.api.common.ResultJson;
 import com.dreamtale.instant.message.api.entity.user.enums.LoginEnum;
 import com.dreamtale.instant.message.api.entity.user.param.UserLoginParam;
+import com.dreamtale.instant.message.api.entity.user.pojo.BaseUser;
 import com.dreamtale.instant.message.web.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -25,12 +28,18 @@ public class LoginResource {
     LoginService loginService;
 
     @PostMapping("/login")
-    public ResultJson login(UserLoginParam userLoginParam){
+    public ResultJson login(HttpServletRequest request, HttpServletResponse response, UserLoginParam userLoginParam){
         ResultJson resultJson = new ResultJson();
-        boolean flag = loginService.login(userLoginParam);
-        if(!flag){
+        BaseUser baseUser = loginService.login(userLoginParam);
+        if(baseUser==null){
             resultJson.setCode(LoginEnum.LOGIN_USER_PASSWORD_ERROR.getCode());
             resultJson.setMessage(LoginEnum.LOGIN_USER_PASSWORD_ERROR.getDesc());
+            resultJson.setData(false);
+        } else {
+            resultJson.setCode(LoginEnum.LOGIN_SUCCESS.getCode());
+            resultJson.setMessage(LoginEnum.LOGIN_SUCCESS.getDesc());
+            resultJson.setData(true);
+            request.setAttribute("user", baseUser);
         }
         return resultJson;
     }
