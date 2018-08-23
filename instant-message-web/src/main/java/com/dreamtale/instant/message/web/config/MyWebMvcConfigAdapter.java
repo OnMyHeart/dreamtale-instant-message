@@ -34,6 +34,8 @@ public class MyWebMvcConfigAdapter extends WebMvcConfigurerAdapter{
                 .excludePathPatterns("/admin/login.html")
                 //首页
                 .excludePathPatterns("/admin/index.html")
+                //仓库管理
+                .excludePathPatterns("/admin/ck/**")
                 //用户注册
                 .excludePathPatterns("/admin/register.html")
                 //用户登录
