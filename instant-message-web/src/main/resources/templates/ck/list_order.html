@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> - Bootstrap Table</title>
+    <title>订单列表</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link rel="shortcut icon" href="favicon.ico" />
@@ -25,7 +25,6 @@
         <div class="ibox-content">
             <div class="row row-lg">
                 <div class="col-sm-12">
-
                 </div>
             </div>
             <div class="row row-lg">
@@ -44,9 +43,7 @@
                                     <i class="glyphicon glyphicon-trash" aria-hidden="true">删除</i>
                                 </button>
                             </div>
-                            <table id="exampleTableEvents" data-height="400" data-mobile-responsive="true">
-
-                            </table>
+                            <table id="exampleTableEvents" data-mobile-responsive="true"></table>
                         </div>
                     </div>
                     <!-- End Example Events -->
@@ -70,7 +67,7 @@
     $(function() {
         $('#exampleTableEvents').bootstrapTable({
             url: "queryOrderList",
-            search: true,
+            search: false,
             striped: true,
             pagination: true,
             showRefresh: true,
@@ -87,7 +84,6 @@
             },
             sidePagination: "server",
             columns: [
-                {checkBox:false},
                 {field:"id",title:"订单编号",align: 'center', valign: 'middle',data:"id"},
                 {field:"name",title:"品名",align: 'center', valign: 'middle',data:"name"},
                 {field:"unit",title:"单位",align: 'center', valign: 'middle',data:"unit"},

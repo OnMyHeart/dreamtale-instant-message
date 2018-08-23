@@ -20,8 +20,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for district
 -- ----------------------------
-DROP TABLE IF EXISTS `district`;
-CREATE TABLE `district`  (
+DROP TABLE IF EXISTS `ck_district`;
+CREATE TABLE `ck_district`  (
   `id` bigint(8) NOT NULL COMMENT '区域自增ID',
   `name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '区域名称',
   PRIMARY KEY (`id`) USING BTREE
@@ -30,8 +30,8 @@ CREATE TABLE `district`  (
 -- ----------------------------
 -- Table structure for order
 -- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order`  (
+DROP TABLE IF EXISTS `ck_order`;
+CREATE TABLE `ck_order`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
   `salesman_no` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员编号',
   `product_id` bigint(10) NULL DEFAULT NULL COMMENT '产品编号',
@@ -45,8 +45,8 @@ CREATE TABLE `order`  (
 -- ----------------------------
 -- Table structure for product
 -- ----------------------------
-DROP TABLE IF EXISTS `product`;
-CREATE TABLE `product`  (
+DROP TABLE IF EXISTS `ck_product`;
+CREATE TABLE `ck_product`  (
   `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
   `no` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品条形码',
   `name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品名称',
@@ -61,8 +61,8 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
+DROP TABLE IF EXISTS `ck_user`;
+CREATE TABLE `ck_user`  (
   `id` bigint(10) NOT NULL COMMENT '自增ID',
   `user_phone` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员电话',
   `user_name` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员姓名',

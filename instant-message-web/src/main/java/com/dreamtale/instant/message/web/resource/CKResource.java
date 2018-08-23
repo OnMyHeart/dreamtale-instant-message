@@ -27,7 +27,10 @@ public class CKResource {
     @GetMapping("/order/queryOrderList")
     public Object queryHouseList(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
         Map<String, Object> page = new HashMap<>();
-        Object parameterMap = request.getParameterMap();
+        Map<String, String[]> parameterMap = request.getParameterMap();
+//        String search = parameterMap.get("search")[0];
+        String offset = parameterMap.get("offset")[0];
+        String limit = parameterMap.get("limit")[0];
         page.put("total", 57);
         page.put("page", 3);
         List<Map<String, Object>> data = new ArrayList<>();
