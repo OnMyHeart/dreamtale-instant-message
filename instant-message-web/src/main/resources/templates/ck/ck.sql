@@ -64,8 +64,8 @@ CREATE TABLE `ck_product`  (
 DROP TABLE IF EXISTS `ck_user`;
 CREATE TABLE `ck_user`  (
   `id` bigint(10) NOT NULL COMMENT '自增ID',
-  `user_phone` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员电话',
-  `user_name` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员姓名',
+  `phone` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员电话',
+  `name` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员姓名',
   `district_no` bigint(8) NULL DEFAULT NULL COMMENT '业务员所属区域ID',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;

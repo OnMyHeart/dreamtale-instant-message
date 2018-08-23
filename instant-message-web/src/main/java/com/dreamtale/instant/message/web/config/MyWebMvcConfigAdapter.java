@@ -34,8 +34,24 @@ public class MyWebMvcConfigAdapter extends WebMvcConfigurerAdapter{
                 .excludePathPatterns("/admin/login.html")
                 //首页
                 .excludePathPatterns("/admin/index.html")
-                //仓库管理
-                .excludePathPatterns("/admin/ck/**")
+
+                //仓库 - 订单列表页面
+                .excludePathPatterns("/admin/ck/order/list.html")
+                //仓库 - 订单查询接口
+                .excludePathPatterns("/admin/ck/order/queryOrderList")
+                //仓库 - 用户列表页面
+                .excludePathPatterns("/admin/ck/user/list.html")
+                //仓库 - 用户查询接口
+                .excludePathPatterns("/admin/ck/user/queryUserList")
+                //仓库 - 区域列表页面
+                .excludePathPatterns("/admin/ck/district/list.html")
+                //仓库 - 区域查询接口
+                .excludePathPatterns("/admin/ck/district/queryDistrictList")
+                //仓库 - 产品列表接口
+                .excludePathPatterns("/admin/ck/product/list.html")
+                //仓库 - 产品查询接口
+                .excludePathPatterns("/admin/ck/product/queryProductList")
+
                 //用户注册
                 .excludePathPatterns("/admin/register.html")
                 //用户登录
