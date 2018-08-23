@@ -25,10 +25,11 @@ import java.util.Map;
 public class CKResource {
 
     @GetMapping("/order/queryOrderList")
-    public Map<String, Object> queryHouseList(Map<String, Object> map) {
+    public Object queryHouseList(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) {
         Map<String, Object> page = new HashMap<>();
-        page.put("page", 100);
-        page.put("total", 1000);
+        Object parameterMap = request.getParameterMap();
+        page.put("total", 57);
+        page.put("page", 3);
         List<Map<String, Object>> data = new ArrayList<>();
         for (int i=0; i<10; i++){
             Map<String, Object> obj = new HashMap<>();
@@ -43,7 +44,7 @@ public class CKResource {
             obj.put("salesmanName", "张三");
             data.add(obj);
         }
-        page.put("data",data);
+        page.put("rows",data);
         return page;
     }
 
