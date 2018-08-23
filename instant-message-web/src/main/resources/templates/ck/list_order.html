@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> - Bootstrap Table</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link href="http://dreamtale.iok.la/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet" />
+    <link href="http://dreamtale.iok.la/static/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet" />
+    <link href="http://dreamtale.iok.la/static/admin/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="http://dreamtale.iok.la/static/admin/css/animate.css" rel="stylesheet" />
+    <link href="http://dreamtale.iok.la/static/admin/css/style.css?v=4.1.0" rel="stylesheet" />
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>出货列表</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+
+                </div>
+            </div>
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                                <button type="button" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
+                                </button>
+                                <button type="button" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-trash" aria-hidden="true">删除</i>
+                                </button>
+                            </div>
+                            <table id="exampleTableEvents" data-height="400" data-mobile-responsive="true">
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Example Events -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Panel Other -->
+</div>
+<!-- 全局js -->
+<script src="http://dreamtale.iok.la/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="http://dreamtale.iok.la/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="http://dreamtale.iok.la/static/admin/js/content.js?v=1.0.0"></script>
+<!-- Bootstrap table -->
+<script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js?v=1.9.0"></script>
+<script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js?v=1.9.0"></script>
+<script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.0.0"></script>
+<!-- Peity -->
+<script>
+    $(function() {
+        $('#exampleTableEvents').bootstrapTable({
+            url: "queryOrderList",
+            search: true,
+            striped: true,
+            pagination: true,
+            showRefresh: true,
+            showToggle: true,
+            showColumns: true,
+            dataType: "json",
+            iconSize: 'outline',
+            toolbar: '#exampleTableEventsToolbar',
+            icons: {
+                refresh: 'glyphicon-repeat',
+                toggle: 'glyphicon-list-alt',
+                columns: 'glyphicon-list'
+            },
+            sidePagination: "server",
+            columns: [
+                {checkBox:false},
+                {field:"id",title:"订单编号",align: 'center', valign: 'middle'},
+                {field:"name",title:"品名",align: 'center', valign: 'middle'},
+                {field:"unit",title:"单位",align: 'center', valign: 'middle'},
+                {field:"specification",title:"规格",align: 'center', valign: 'middle'},
+                {field:"price",title:"业务员价",align: 'center', valign: 'middle'},
+                {field:"count",title:"出货数量",align: 'center', valign: 'middle'},
+                {field:"amount",title:"出货金额",align: 'center', valign: 'middle'},
+                {field:"createTime",title:"出货日期",align: 'center', valign: 'middle'},
+                {field:"salesmanName",title:"业务员",align: 'center', valign: 'middle'}
+            ]
+        });
+    });
+</script>
+</body>
+
+</html>
