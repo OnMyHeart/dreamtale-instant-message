@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/ck")
 public class CKController {
 
+    @RequestMapping("/index")
+    public String index(ModelMap modelMap){
+        return "ck/index";
+    }
+
     @RequestMapping("/order/list")
     public String listOrder(ModelMap modelMap){
         return "ck/list_order";
