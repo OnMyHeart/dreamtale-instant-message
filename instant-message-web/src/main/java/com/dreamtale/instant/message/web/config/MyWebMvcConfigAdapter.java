@@ -51,6 +51,7 @@ public class MyWebMvcConfigAdapter extends WebMvcConfigurerAdapter{
                 .excludePathPatterns("/admin/ck/product/list.html")
                 //仓库 - 产品查询接口
                 .excludePathPatterns("/admin/ck/product/queryProductList")
+                .excludePathPatterns("/admin/ck/order/**")
 
                 //用户注册
                 .excludePathPatterns("/admin/register.html")
