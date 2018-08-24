@@ -17,11 +17,11 @@ public class WebBaseInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         BaseUser baseUser = (BaseUser) request.getSession().getAttribute("user");
-        if(baseUser==null){
-            System.out.println("未认证通过，请登录！");
-            response.sendRedirect("/admin/login.html");
-            return false;
-        }
+//        if(baseUser==null){
+//            System.out.println("未认证通过，请登录！");
+//            response.sendRedirect("/admin/login.html");
+//            return false;
+//        }
         return true;
     }
 
