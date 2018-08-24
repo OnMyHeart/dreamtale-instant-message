@@ -125,9 +125,8 @@
                 cache: false,
                 sidePagination: "server",
                 columns: [
-                    {checkBox:true},
+                    {checkBox:false},
                     {field:"id",title:"产品编号",align: 'center', valign: 'middle',data:"id"},
-                    {field:"no",title:"产品条形码",align: 'center', valign: 'middle',data:"no"},
                     {field:"name",title:"产品名称",align: 'center', valign: 'middle',data:"name"},
                     {field:"unit",title:"单位",align: 'center', valign: 'middle',data:"unit"},
                     {field:"specification",title:"规格",align: 'center', valign: 'middle',data:"specification"},
@@ -218,7 +217,20 @@
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
-                    <table id="productList" data-mobile-responsive="true"></table>
+                    <table id="productList" data-mobile-responsive="true">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="id">产品编号</th>
+                                <th data-field="name">产品名称</th>
+                                <th data-field="unit">单位</th>
+                                <th data-field="specification">规格</th>
+                                <th data-field="price">价格</th>
+                                <th data-field="batchNo">产品批次号</th>
+                                <th data-field="lowNo">产品小号</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </form>
             </div>
         </div>
