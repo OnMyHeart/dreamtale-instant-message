@@ -14,22 +14,22 @@ public class CKController {
 
     @RequestMapping("/order/list")
     public String listOrder(ModelMap modelMap){
-        return "mapper/ck/list_order";
+        return "ck/list_order";
     }
 
     @RequestMapping("/product/list")
     public String listProduct(ModelMap modelMap){
-        return "mapper/ck/list_product";
+        return "ck/list_product";
     }
 
     @RequestMapping("/user/list")
     public String listUser(ModelMap modelMap){
-        return "mapper/ck/list_user";
+        return "ck/list_user";
     }
 
     @RequestMapping("/district/list")
     public String listDistrict(ModelMap modelMap){
-        return "mapper/ck/list_district";
+        return "ck/list_district";
     }
 
 }

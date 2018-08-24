@@ -79,4 +79,11 @@
       district_no = #{districtNo,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="queryUserList" resultType="com.dreamtale.instant.message.api.entity.ck.json.CkUserListJson" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkUserListQueryParam" >
+    SELECT cu.id AS id, cu.name AS name, cu.phone AS phone, cu.district_no AS districtNo, cd.name AS districtName
+    FROM ck_user cu
+    LEFT OUTER JOIN ck_district cd ON cd.id=cu.district_no
+    ORDER BY cu.id DESC
+  </select>
+
 </mapper>

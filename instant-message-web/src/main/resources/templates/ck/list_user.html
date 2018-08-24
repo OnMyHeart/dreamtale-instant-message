@@ -34,7 +34,7 @@
                         <div class="example">
                             <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
                                 <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
+                                    <i class="glyphicon glyphicon-plus" aria-hidden="true" id="addUser">新增</i>
                                 </button>
                                 <button type="button" class="btn btn-outline btn-default">
                                     <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
@@ -62,9 +62,14 @@
 <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js?v=1.9.0"></script>
 <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js?v=1.9.0"></script>
 <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.0.0"></script>
+<!-- layer 弹框 -->
+<script src="http://dreamtale.iok.la/static/layer/dist/layer.js?v=1.0.0"></script>
+
+<script src="http://dreamtale.iok.la/static/common/js/common.js?v=1.0.0"></script>
 <!-- Peity -->
 <script>
     $(function() {
+
         $('#exampleTableEvents').bootstrapTable({
             url: "queryUserList",
             search: false,
@@ -90,8 +95,98 @@
                 {field:"districtName",title:"业务员所属区域",align: 'center', valign: 'middle',data:"unit"}
             ]
         });
+
+        $("#addUser").on("click", function () {
+            //加载区域下拉框
+            var ajaxObj = {url: '/admin/ck/district/queryDistrictList',param:{"offset":0, "limit":100},method:"GET",async:false};
+            commonJS.sendAjaxRequest(ajaxObj, function (data) {
+                if(data.rows!=null){
+                    var html = "<option value=''>请选择</option>";
+                    data.rows.forEach(function (t) {
+                        html += "<option value='"+t.id+"'>"+t.name+"</option>";
+                    });
+                    $("#districtNo").html(html);
+                } else {
+                    layer.message("未获取到区域列表！");
+                }
+            });
+
+            layer.open({
+                title: "添加业务员",
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['580px', '400px'], //宽高
+                content: $("#addSalesman"),
+                btn: ['确定','取消'],
+                btn1: function (index) {
+                    var name = $("#name").val();
+                    if(name==null || name=="" || name==undefined){
+                        layer.message("业务员姓名不能为空！");
+                        return;
+                    }
+                    var phone = $("#phone").val();
+                    if(phone==null || phone=="" || phone==undefined){
+                        layer.message("业务员电话不能为空！");
+                        return;
+                    }
+                    var districtNo = $("#districtNo").val();
+                    if(districtNo==null || districtNo=="" || districtNo==undefined){
+                        layer.message("业务员所属区域不能为空！");
+                        return;
+                    }
+                    var param = {
+                        name: name,
+                        phone: phone,
+                        districtNo: districtNo
+                    };
+                    var ajaxObj = {url: 'add',param:param,method:"POST",async:false};
+                    commonJS.sendAjaxRequest(ajaxObj, function (data) {
+                        if(data.data==true){
+                            layer.msg('新增业务员成功！');
+                        } else {
+                            layer.msg("新增业务员失败！")
+                        }
+                        layer.close(index);
+                    });
+                },
+                btn2: function (index) {
+                    layer.close(index);
+                }
+            });
+        });
     });
 </script>
 </body>
-
+<div id="addSalesman" style="display: none">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">区域</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" id="districtNo" name="districtNo">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
 </html>

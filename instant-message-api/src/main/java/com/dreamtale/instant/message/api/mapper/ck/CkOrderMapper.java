@@ -1,6 +1,9 @@
 package com.dreamtale.instant.message.api.mapper.ck;
 
+import com.dreamtale.instant.message.api.entity.ck.json.CkOrderListJson;
 import com.dreamtale.instant.message.api.entity.ck.pojo.CkOrder;
+
+import java.util.List;
 
 public interface CkOrderMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface CkOrderMapper {
     int updateByPrimaryKeySelective(CkOrder record);
 
     int updateByPrimaryKey(CkOrder record);
+
+    List<CkOrderListJson> queryCkOrderList();
 }

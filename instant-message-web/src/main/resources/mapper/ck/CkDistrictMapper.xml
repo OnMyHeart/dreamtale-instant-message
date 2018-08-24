@@ -55,4 +55,12 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <insert id="addDistrict" parameterType="java.lang.String">
+    INSERT INTO ck_district (name) VALUES (#{name,jdbcType=VARCHAR})
+  </insert>
+  <select id="queryDistrictList" resultMap="BaseResultMap" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkDistrictListQueryParam">
+    SELECT
+    <include refid="Base_Column_List"  />
+    FROM ck_district ORDER BY id DESC
+  </select>
 </mapper>

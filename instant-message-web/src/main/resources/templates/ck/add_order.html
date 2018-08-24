@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>订单列表</title>
+    <title>录入订单</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link rel="shortcut icon" href="favicon.ico" />
@@ -14,13 +13,12 @@
     <link href="http://dreamtale.iok.la/static/admin/css/animate.css" rel="stylesheet" />
     <link href="http://dreamtale.iok.la/static/admin/css/style.css?v=4.1.0" rel="stylesheet" />
 </head>
-
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <!-- Panel Other -->
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h5>出货列表</h5>
+            <h5>发货</h5>
         </div>
         <div class="ibox-content">
             <div class="row row-lg">
@@ -29,20 +27,8 @@
             </div>
             <div class="row row-lg">
                 <div class="col-sm-12">
-                    <!-- Example Events -->
                     <div class="example-wrap">
                         <div class="example">
-                            <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
-                                </button>
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true">删除</i>
-                                </button>
-                            </div>
                             <table id="exampleTableEvents" data-mobile-responsive="true"></table>
                         </div>
                     </div>
@@ -66,7 +52,7 @@
 <script>
     $(function() {
         $('#exampleTableEvents').bootstrapTable({
-            url: "queryOrderList",
+            url: "queryProductList",
             search: false,
             striped: true,
             pagination: true,
@@ -76,7 +62,6 @@
             dataType: "json",
             iconSize: 'outline',
             cache: false,
-            toolbar: '#exampleTableEventsToolbar',
             icons: {
                 refresh: 'glyphicon-repeat',
                 toggle: 'glyphicon-list-alt',
@@ -84,20 +69,17 @@
             },
             sidePagination: "server",
             columns: [
-                {field:"id",title:"订单编号",align: 'center', valign: 'middle',data:"id"},
-                {field:"productNo",title:"产品条形码",align: 'center', valign: 'middle',data:"productNo"},
-                {field:"productName",title:"品名",align: 'center', valign: 'middle',data:"productName"},
+                {field:"id",title:"产品编号",align: 'center', valign: 'middle',data:"id"},
+                {field:"no",title:"产品条形码",align: 'center', valign: 'middle',data:"no"},
+                {field:"name",title:"产品名称",align: 'center', valign: 'middle',data:"name"},
                 {field:"unit",title:"单位",align: 'center', valign: 'middle',data:"unit"},
                 {field:"specification",title:"规格",align: 'center', valign: 'middle',data:"specification"},
-                {field:"price",title:"业务员价",align: 'center', valign: 'middle',data:"price"},
-                {field:"count",title:"出货数量",align: 'center', valign: 'middle',data:"count"},
-                {field:"amount",title:"出货金额",align: 'center', valign: 'middle',data:"amount"},
-                {field:"createTime",title:"出货日期",align: 'center', valign: 'middle',data:"createTime"},
-                {field:"salesmanName",title:"业务员",align: 'center', valign: 'middle',data:"salesmanName"}
+                {field:"price",title:"价格",align: 'center', valign: 'middle',data:"price"},
+                {field:"batchNo",title:"产品批次号",align: 'center', valign: 'middle',data:"count"},
+                {field:"lowNo",title:"产品小号",align: 'center', valign: 'middle',data:"amount"}
             ]
         });
     });
 </script>
 </body>
-
 </html>

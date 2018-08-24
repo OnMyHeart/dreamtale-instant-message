@@ -13,8 +13,61 @@
     <link href="http://dreamtale.iok.la/static/admin/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
     <link href="http://dreamtale.iok.la/static/admin/css/animate.css" rel="stylesheet" />
     <link href="http://dreamtale.iok.la/static/admin/css/style.css?v=4.1.0" rel="stylesheet" />
-</head>
+    <!-- 全局js -->
+    <script src="http://dreamtale.iok.la/static/admin/js/jquery.min.js?v=2.1.4"></script>
+    <script src="http://dreamtale.iok.la/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- 自定义js -->
+    <script src="http://dreamtale.iok.la/static/admin/js/content.js?v=1.0.0"></script>
+    <script src="http://dreamtale.iok.la/static/common/js/common.js?v=1.0.0"></script>
+    <!-- Bootstrap table -->
+    <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js?v=1.9.0"></script>
+    <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js?v=1.9.0"></script>
+    <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.0.0"></script>
+    <!-- layer 弹框 -->
+    <script src="http://dreamtale.iok.la/static/layer/dist/layer.js?v=1.0.0"></script>
+    <!-- Peity -->
+    <script>
+        $(function() {
+            $('#exampleTableEvents').bootstrapTable({
+                url: "queryDistrictList",
+                search: false,
+                striped: true,
+                pagination: true,
+                showRefresh: true,
+                showToggle: true,
+                showColumns: true,
+                dataType: "json",
+                iconSize: 'outline',
+                cache: false,
+                toolbar: '#exampleTableEventsToolbar',
+                icons: {
+                    refresh: 'glyphicon-repeat',
+                    toggle: 'glyphicon-list-alt',
+                    columns: 'glyphicon-list'
+                },
+                sidePagination: "server",
+                columns: [
+                    {field:"id",title:"区域编号",align: 'center', valign: 'middle',data:"id"},
+                    {field:"name",title:"区域名称",align: 'center', valign: 'middle',data:"name"}
+                ]
+            });
 
+            $("#add_district").on("click", function () {
+                layer.prompt({title: '请输入区域名称', formType: 3}, function(pass, index){
+                    var ajaxObj = {url: 'add',param:{"name":pass},method:"POST",async:false};
+                    commonJS.sendAjaxRequest(ajaxObj, function (data) {
+                        if(data.data==true){
+                            layer.msg('新增区域成功！');
+                        } else {
+                            layer.msg("新增区域失败！")
+                        }
+                        layer.close(index);
+                    });
+                });
+            });
+        });
+    </script>
+</head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <!-- Panel Other -->
@@ -34,13 +87,7 @@
                         <div class="example">
                             <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
                                 <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
-                                </button>
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true">删除</i>
+                                    <i class="glyphicon glyphicon-plus" aria-hidden="true" id="add_district">新增区域</i>
                                 </button>
                             </div>
                             <table id="exampleTableEvents" data-mobile-responsive="true"></table>
@@ -53,43 +100,6 @@
     </div>
     <!-- End Panel Other -->
 </div>
-<!-- 全局js -->
-<script src="http://dreamtale.iok.la/static/admin/js/jquery.min.js?v=2.1.4"></script>
-<script src="http://dreamtale.iok.la/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
-<!-- 自定义js -->
-<script src="http://dreamtale.iok.la/static/admin/js/content.js?v=1.0.0"></script>
-<!-- Bootstrap table -->
-<script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js?v=1.9.0"></script>
-<script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js?v=1.9.0"></script>
-<script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.0.0"></script>
-<!-- Peity -->
-<script>
-    $(function() {
-        $('#exampleTableEvents').bootstrapTable({
-            url: "queryDistrictList",
-            search: false,
-            striped: true,
-            pagination: true,
-            showRefresh: true,
-            showToggle: true,
-            showColumns: true,
-            dataType: "json",
-            iconSize: 'outline',
-            cache: false,
-            toolbar: '#exampleTableEventsToolbar',
-            icons: {
-                refresh: 'glyphicon-repeat',
-                toggle: 'glyphicon-list-alt',
-                columns: 'glyphicon-list'
-            },
-            sidePagination: "server",
-            columns: [
-                {field:"id",title:"区域编号",align: 'center', valign: 'middle',data:"id"},
-                {field:"name",title:"区域名称",align: 'center', valign: 'middle',data:"name"}
-            ]
-        });
-    });
-</script>
-</body>
 
+</body>
 </html>
