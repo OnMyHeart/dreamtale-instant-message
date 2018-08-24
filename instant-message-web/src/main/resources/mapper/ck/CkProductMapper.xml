@@ -125,4 +125,10 @@
       low_no = #{lowNo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="queryProductList" resultMap="BaseResultMap" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkProductListQueryParam">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM ck_product
+    ORDER BY id DESC
+  </select>
 </mapper>

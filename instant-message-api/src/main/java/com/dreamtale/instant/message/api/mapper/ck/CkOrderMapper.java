@@ -1,6 +1,7 @@
 package com.dreamtale.instant.message.api.mapper.ck;
 
 import com.dreamtale.instant.message.api.entity.ck.json.CkOrderListJson;
+import com.dreamtale.instant.message.api.entity.ck.param.CkOrderListQueryParam;
 import com.dreamtale.instant.message.api.entity.ck.pojo.CkOrder;
 
 import java.util.List;
@@ -18,5 +19,5 @@ public interface CkOrderMapper {
 
     int updateByPrimaryKey(CkOrder record);
 
-    List<CkOrderListJson> queryCkOrderList();
+    List<CkOrderListJson> queryCkOrderList(CkOrderListQueryParam ckOrderListQueryParam);
 }

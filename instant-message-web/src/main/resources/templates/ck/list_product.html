@@ -33,14 +33,11 @@
                     <div class="example-wrap">
                         <div class="example">
                             <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
+                                <button type="button" class="btn btn-outline btn-default" id="add">
+                                    <i class="glyphicon glyphicon-plus" aria-hidden="true">新增产品</i>
                                 </button>
                                 <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline btn-default">
-                                    <i class="glyphicon glyphicon-trash" aria-hidden="true">删除</i>
+                                    <i class="glyphicon glyphicon-trash" aria-hidden="true">删除产品</i>
                                 </button>
                             </div>
                             <table id="exampleTableEvents" data-mobile-responsive="true"></table>
@@ -58,10 +55,13 @@
 <script src="http://dreamtale.iok.la/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 <!-- 自定义js -->
 <script src="http://dreamtale.iok.la/static/admin/js/content.js?v=1.0.0"></script>
+<script src="http://dreamtale.iok.la/static/common/js/common.js?v=1.0.0"></script>
 <!-- Bootstrap table -->
 <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table.min.js?v=1.9.0"></script>
 <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js?v=1.9.0"></script>
 <script src="http://dreamtale.iok.la/static/admin/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.0.0"></script>
+<!-- layer 弹框 -->
+<script src="http://dreamtale.iok.la/static/layer/dist/layer.js?v=1.0.0"></script>
 <!-- Peity -->
 <script>
     $(function() {
@@ -94,8 +94,131 @@
                 {field:"lowNo",title:"产品小号",align: 'center', valign: 'middle',data:"amount"}
             ]
         });
+
+        $("#add").on("click", function () {
+            layer.open({
+                title: "新增产品",
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['580px', '400px'], //宽高
+                content: $("#addProduct"),
+                btn: ['确定','取消'],
+                btn1: function (index) {
+                    var name = $("#name").val();
+                    if(name==null || name=="" || name==undefined){
+                        layer.message("品名不能为空！");
+                        return;
+                    }
+                    var unit = $("#unit").val();
+                    if(unit==null || unit=="" || unit==undefined){
+                        layer.message("单位不能为空！");
+                        return;
+                    }
+                    var specification = $("#specification").val();
+                    if(specification==null || specification=="" || specification==undefined){
+                        layer.message("规格不能为空！");
+                        return;
+                    }
+                    var price = $("#price").val();
+                    if(price==null || price=="" || price==undefined){
+                        layer.message("价格不能为空！");
+                        return;
+                    }
+                    var batchNo = $("#batchNo").val();
+                    if(batchNo==null || batchNo=="" || batchNo==undefined){
+                        layer.message("批次号不能为空！");
+                        return;
+                    }
+                    var lowNo = $("#lowNo").val();
+                    if(lowNo==null || lowNo=="" || lowNo==undefined){
+                        layer.message("小号不能为空！");
+                        return;
+                    }
+                    var no = $("#no").val();
+                    var param = {
+                        no: no,
+                        name: name,
+                        unit: unit,
+                        specification: specification,
+                        price: price,
+                        batchNo: batchNo,
+                        lowNo: lowNo
+                    };
+                    var ajaxObj = {url: 'add',param:param,method:"POST",async:false};
+                    commonJS.sendAjaxRequest(ajaxObj, function (data) {
+                        if(data.data==true){
+                            layer.msg('新增产品成功！');
+                        } else {
+                            layer.msg("新增产品失败！")
+                        }
+                        layer.close(index);
+                    });
+                },
+                btn2: function (index) {
+                    layer.close(index);
+                }
+            });
+        });
+
     });
 </script>
 </body>
-
+<div id="addProduct" style="display: none">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <form method="get" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">条形码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="no" name="no">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">品名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">单位</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="unit" name="unit">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">规格</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="specification" name="specification">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">价格</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="price" name="price">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">批次号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="batchNo" name="batchNo">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">小号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lowNo" name="lowNo">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

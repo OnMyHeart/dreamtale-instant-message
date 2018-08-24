@@ -12,8 +12,6 @@ public class CkOrderListJson implements Serializable {
 
     private Long productId;
 
-    private String productName;
-
     private Long count;
 
     private BigDecimal price;
@@ -22,7 +20,23 @@ public class CkOrderListJson implements Serializable {
 
     private Date createTime;
 
+    private Long districtNo;
+
+    private String districtName;
+
     private String salesmanName;
+
+    private String salesmanPhone;
+
+    private String productCode;
+
+    private String productName;
+
+    private String unit;
+
+    private String batchNo;
+
+    private String lowNo;
 
     public Long getId() {
         return id;
@@ -46,14 +60,6 @@ public class CkOrderListJson implements Serializable {
 
     public void setProductId(Long productId) {
         this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
     }
 
     public Long getCount() {
@@ -88,11 +94,75 @@ public class CkOrderListJson implements Serializable {
         this.createTime = createTime;
     }
 
+    public Long getDistrictNo() {
+        return districtNo;
+    }
+
+    public void setDistrictNo(Long districtNo) {
+        this.districtNo = districtNo;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
     public String getSalesmanName() {
         return salesmanName;
     }
 
     public void setSalesmanName(String salesmanName) {
         this.salesmanName = salesmanName;
+    }
+
+    public String getSalesmanPhone() {
+        return salesmanPhone;
+    }
+
+    public void setSalesmanPhone(String salesmanPhone) {
+        this.salesmanPhone = salesmanPhone;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getBatchNo() {
+        return batchNo;
+    }
+
+    public void setBatchNo(String batchNo) {
+        this.batchNo = batchNo;
+    }
+
+    public String getLowNo() {
+        return lowNo;
+    }
+
+    public void setLowNo(String lowNo) {
+        this.lowNo = lowNo;
     }
 }
