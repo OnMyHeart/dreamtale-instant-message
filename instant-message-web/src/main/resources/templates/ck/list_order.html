@@ -96,12 +96,11 @@
         });
 
         $("#add").on("click", function () {
-
             //加载业务员下拉框
             var ajaxObj = {url: '/admin/ck/user/queryUserList',param:{"offset":0, "limit":100},method:"GET",async:false};
             commonJS.sendAjaxRequest(ajaxObj, function (data) {
                 if(data.rows!=null){
-                    var html = "<option value=''>请选择</option>";
+                    var html = "<option value=''>请选择业务员</option>";
                     data.rows.forEach(function (t) {
                         html += "<option value='"+t.id+"'>"+t.name+"</option>";
                     });
@@ -110,7 +109,8 @@
                     layer.message("未获取到业务员列表！");
                 }
             });
-
+            //每次打开都重新加载数据
+            $('#productList').bootstrapTable('destroy');
             //加载商品列表
             $('#productList').bootstrapTable({
                 url: "/admin/ck/product/queryProductList",
@@ -123,7 +123,11 @@
                 dataType: "json",
                 iconSize: 'outline',
                 cache: false,
+                toolbar: '#productListToolBars',
                 sidePagination: "server",
+                selectItemName: "productSelect",
+                clickToSelect: false,
+                // undefinedText:'<input type="text" class="form-control" width="100px;">',
                 columns: [
                     {checkBox:false},
                     {field:"id",title:"产品编号",align: 'center', valign: 'middle',data:"id"},
@@ -132,8 +136,29 @@
                     {field:"specification",title:"规格",align: 'center', valign: 'middle',data:"specification"},
                     {field:"price",title:"价格",align: 'center', valign: 'middle',data:"price"},
                     {field:"batchNo",title:"产品批次号",align: 'center', valign: 'middle',data:"count"},
-                    {field:"lowNo",title:"产品小号",align: 'center', valign: 'middle',data:"amount"}
+                    {field:"lowNo",title:"产品小号",align: 'center', valign: 'middle',data:"amount"},
+                    {field:"count",title:"出货数量",align: 'center', valign: 'middle',data:"count",
+                        formatter:function (value, row, index) {
+                            return ['<input name="count" id="count_'+row.id+'" type="text" class="form-control" value="0" style="display: none;" />'].join("");
+                        }
+                    }
                 ]
+            });
+
+            $('#productList').on("check-all.bs.table", function(row, index){
+                $("input[name='count']").show();
+            });
+
+            $('#productList').on("uncheck-all.bs.table", function(row, index){
+                $("input[name='count']").hide();
+            });
+
+            $('#productList').on("check.bs.table", function(row, index){
+                $("#count_"+index.id).show();
+            });
+
+            $('#productList').on("uncheck.bs.table", function(row, index){
+                $("#count_"+index.id).hide();
             });
 
             layer.open({
@@ -204,34 +229,33 @@
 </script>
 </body>
 <div id="addOrder" style="display: none">
-    <div class="col-sm-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-content">
-                <form method="get" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">业务员</label>
-                        <div class="col-sm-3">
+    <div class="ibox-content">
+        <div class="row row-lg">
+            <div class="col-sm-12">
+                <div class="example-wrap">
+                    <div class="example">
+                        <div class="btn-group hidden-xs" id="productListToolBars" role="group">
                             <select class="form-control m-b" id="userId" name="userId">
-                                <option value="">请选择</option>
+                                <option value="">请选择业务员</option>
                             </select>
                         </div>
+                        <table id="productList" data-mobile-responsive="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="checkStatus" data-checkbox="true"></th>
+                                    <th data-field="id">产品编号</th>
+                                    <th data-field="name">产品名称</th>
+                                    <th data-field="unit">单位</th>
+                                    <th data-field="specification">规格</th>
+                                    <th data-field="price">价格</th>
+                                    <th data-field="batchNo">产品批次号</th>
+                                    <th data-field="lowNo">产品小号</th>
+                                    <th data-field="count">出货数量</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                    <div class="hr-line-dashed"></div>
-                    <table id="productList" data-mobile-responsive="true">
-                        <thead>
-                            <tr>
-                                <th data-field="state" data-checkbox="true"></th>
-                                <th data-field="id">产品编号</th>
-                                <th data-field="name">产品名称</th>
-                                <th data-field="unit">单位</th>
-                                <th data-field="specification">规格</th>
-                                <th data-field="price">价格</th>
-                                <th data-field="batchNo">产品批次号</th>
-                                <th data-field="lowNo">产品小号</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </form>
+                </div>
             </div>
         </div>
     </div>
