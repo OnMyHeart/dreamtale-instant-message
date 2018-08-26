@@ -105,7 +105,7 @@
                     });
                     $("#districtNo").html(html);
                 } else {
-                    layer.message("未获取到区域列表！");
+                    layer.msg("未获取到区域列表！");
                 }
             });
 
@@ -119,17 +119,17 @@
                 btn1: function (index) {
                     var name = $("#name").val();
                     if(name==null || name=="" || name==undefined){
-                        layer.message("业务员姓名不能为空！");
+                        layer.msg("业务员姓名不能为空！");
                         return;
                     }
                     var phone = $("#phone").val();
                     if(phone==null || phone=="" || phone==undefined){
-                        layer.message("业务员电话不能为空！");
+                        layer.msg("业务员电话不能为空！");
                         return;
                     }
                     var districtNo = $("#districtNo").val();
                     if(districtNo==null || districtNo=="" || districtNo==undefined){
-                        layer.message("业务员所属区域不能为空！");
+                        layer.msg("业务员所属区域不能为空！");
                         return;
                     }
                     var param = {

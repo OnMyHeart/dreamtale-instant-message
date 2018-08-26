@@ -29,8 +29,22 @@
       create_time)
     values (#{id,jdbcType=BIGINT}, #{salesmanNo,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT}, 
       #{count,jdbcType=BIGINT}, #{price,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      now())
   </insert>
+
+  <insert id="batchInsert" parameterType="java.util.List" >
+    insert into ck_order (id, salesman_no, product_id,
+      count, price, amount,
+      create_time)
+    values 
+    <foreach collection="orderList" item="order" index="index" separator="," >
+      (#{order.id,jdbcType=BIGINT}, #{order.salesmanNo,jdbcType=VARCHAR}, #{order.productId,jdbcType=BIGINT},
+      #{order.count,jdbcType=BIGINT}, #{order.price,jdbcType=DECIMAL}, #{order.amount,jdbcType=DECIMAL},
+      now())
+    </foreach>
+
+  </insert>
+
   <insert id="insertSelective" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkOrder" >
     insert into ck_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -119,7 +133,7 @@
     co.id AS id, co.salesman_no AS salesmanNo, co.product_id as productId, co.count as count,
     co.price AS  price, co.amount AS  amount, co.create_time AS createTime,
     cd.id AS districtNo, cd.name AS districtName, cu.name AS salesmanName, cu.phone AS salesmanPhone,
-    cp.no AS productCode, cp.name AS productName, cp.unit AS unit, cp.batch_no AS batchNo, cp.low_no AS lowNo
+    cp.no AS productCode, cp.name AS productName, cp.unit AS unit, cp.batch_no AS batchNo, cp.low_no AS lowNo, cp.specification AS specification
      FROM ck_order co
      LEFT OUTER JOIN ck_user cu ON cu.id=co.salesman_no
      LEFT OUTER JOIN ck_district cd ON cu.district_no=cd.id

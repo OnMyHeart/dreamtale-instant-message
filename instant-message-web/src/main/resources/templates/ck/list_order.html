@@ -82,7 +82,7 @@
             sidePagination: "server",
             columns: [
                 {field:"id",title:"订单编号",align: 'center', valign: 'middle',data:"id"},
-                {field:"productNo",title:"产品条形码",align: 'center', valign: 'middle',data:"productNo"},
+                // {field:"productNo",title:"产品条形码",align: 'center', valign: 'middle',data:"productNo"},
                 {field:"productName",title:"品名",align: 'center', valign: 'middle',data:"productName"},
                 {field:"unit",title:"单位",align: 'center', valign: 'middle',data:"unit"},
                 {field:"specification",title:"规格",align: 'center', valign: 'middle',data:"specification"},
@@ -127,7 +127,6 @@
                 sidePagination: "server",
                 selectItemName: "productSelect",
                 clickToSelect: false,
-                // undefinedText:'<input type="text" class="form-control" width="100px;">',
                 columns: [
                     {checkBox:false},
                     {field:"id",title:"产品编号",align: 'center', valign: 'middle',data:"id"},
@@ -136,10 +135,15 @@
                     {field:"specification",title:"规格",align: 'center', valign: 'middle',data:"specification"},
                     {field:"price",title:"价格",align: 'center', valign: 'middle',data:"price"},
                     {field:"batchNo",title:"产品批次号",align: 'center', valign: 'middle',data:"count"},
-                    {field:"lowNo",title:"产品小号",align: 'center', valign: 'middle',data:"amount"},
+                    {field:"lowNo",title:"产品小号",align: 'center', valign: 'middle',data:"lowNo"},
                     {field:"count",title:"出货数量",align: 'center', valign: 'middle',data:"count",
                         formatter:function (value, row, index) {
-                            return ['<input name="count" id="count_'+row.id+'" type="text" class="form-control" value="0" style="display: none;" />'].join("");
+                            return ['<input name="count" productPrice="'+row.price+'" productId="'+row.id+'" id="count_'+row.id+'" type="text" class="form-control" value="0" style="display: none;" />'].join("");
+                        }
+                    },
+                    {field:"amount",title:"计价",align: 'center', valign: 'middle',data:"amount",
+                        formatter:function (value, row, index) {
+                            return ['<span id="amount_'+row.id+'" style="color: red;" >0.00</span>'].join("");
                         }
                     }
                 ]
@@ -147,6 +151,15 @@
 
             $('#productList').on("check-all.bs.table", function(row, index){
                 $("input[name='count']").show();
+                $("input[name='count']").unbind();
+                $("input[name='count']").on("blur", function () {
+                    var productId = $(this).attr("productId");
+                    var inputValue = $(this).val();
+                    var thisPrice = $(this).attr("productPrice");
+                    var thisAmount = thisPrice*inputValue;
+                    $(this).attr("amount", thisAmount);
+                    $("#amount_"+productId).text(thisAmount);
+                });
             });
 
             $('#productList').on("uncheck-all.bs.table", function(row, index){
@@ -155,6 +168,15 @@
 
             $('#productList').on("check.bs.table", function(row, index){
                 $("#count_"+index.id).show();
+                $("input[name='count']").unbind();
+                $("input[name='count']").on("blur", function () {
+                    var productId = $(this).attr("productId");
+                    var inputValue = $(this).val();
+                    var thisPrice = $(this).attr("productPrice");
+                    var thisAmount = thisPrice*inputValue;
+                    $(this).attr("amount", thisAmount);
+                    $("#amount_"+productId).text(thisAmount);
+                });
             });
 
             $('#productList').on("uncheck.bs.table", function(row, index){
@@ -169,55 +191,36 @@
                 content: $("#addOrder"),
                 btn: ['确定','取消'],
                 btn1: function (index) {
-                    var name = $("#name").val();
-                    if(name==null || name=="" || name==undefined){
-                        layer.message("品名不能为空！");
+                    var salesman = $("#userId").val();
+                    if(salesman==null || salesman=="" || salesman==undefined){
+                        layer.msg("请选择业务员！");
                         return;
                     }
-                    var unit = $("#unit").val();
-                    if(unit==null || unit=="" || unit==undefined){
-                        layer.message("单位不能为空！");
+                    var saveOrderItems = $('#productList').bootstrapTable('getSelections');
+                    if(saveOrderItems.length<1){
+                        layer.msg("您未选择任何产品！");
                         return;
+                    } else {
+                        var param = new Array();
+                        saveOrderItems.forEach(function (obj) {
+                            var order = new Object();
+                            order["productId"] = obj.id;
+                            order["count"] = $("#count_"+obj.id).val();
+                            order["salesmanNo"] = $("#userId").val();
+                            order["price"] = obj.price;
+                            order["amount"] = $("#amount_"+obj.id).text();
+                            param.push(order);
+                        });
+                        var ajaxObj = {url: 'add',param:{"orderListStr":JSON.stringify(param)},method:"POST",async:false};
+                        commonJS.sendAjaxRequest(ajaxObj, function (data) {
+                            if(data.data==true){
+                                layer.msg('新增订单成功！');
+                            } else {
+                                layer.msg("新增订单失败！")
+                            }
+                            layer.close(index);
+                        });
                     }
-                    var specification = $("#specification").val();
-                    if(specification==null || specification=="" || specification==undefined){
-                        layer.message("规格不能为空！");
-                        return;
-                    }
-                    var price = $("#price").val();
-                    if(price==null || price=="" || price==undefined){
-                        layer.message("价格不能为空！");
-                        return;
-                    }
-                    var batchNo = $("#batchNo").val();
-                    if(batchNo==null || batchNo=="" || batchNo==undefined){
-                        layer.message("批次号不能为空！");
-                        return;
-                    }
-                    var lowNo = $("#lowNo").val();
-                    if(lowNo==null || lowNo=="" || lowNo==undefined){
-                        layer.message("小号不能为空！");
-                        return;
-                    }
-                    var no = $("#no").val();
-                    var param = {
-                        no: no,
-                        name: name,
-                        unit: unit,
-                        specification: specification,
-                        price: price,
-                        batchNo: batchNo,
-                        lowNo: lowNo
-                    };
-                    var ajaxObj = {url: 'add',param:param,method:"POST",async:false};
-                    commonJS.sendAjaxRequest(ajaxObj, function (data) {
-                        if(data.data==true){
-                            layer.msg('新增产品成功！');
-                        } else {
-                            layer.msg("新增产品失败！")
-                        }
-                        layer.close(index);
-                    });
                 },
                 btn2: function (index) {
                     layer.close(index);

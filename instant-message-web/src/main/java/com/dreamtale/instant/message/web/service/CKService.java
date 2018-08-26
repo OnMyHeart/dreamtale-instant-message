@@ -1,5 +1,8 @@
 package com.dreamtale.instant.message.web.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.dreamtale.instant.message.api.common.ResultJson;
 import com.dreamtale.instant.message.api.entity.ck.json.CkOrderListJson;
 import com.dreamtale.instant.message.api.entity.ck.json.CkUserListJson;
 import com.dreamtale.instant.message.api.entity.ck.param.*;
@@ -14,6 +17,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 仓库业务处理
@@ -40,6 +45,12 @@ public class CKService {
                 ckOrderListQueryParam.getLimit()
         ).doSelectPageInfo(()->ckOrderMapper.queryCkOrderList(ckOrderListQueryParam));
         return pageInfo;
+    }
+
+    public boolean batchAddOrder(String orderListStr){
+        List<CkOrderInsertParam> orderList = (List<CkOrderInsertParam>)JSONArray.parse(orderListStr);
+        int  optNum = ckOrderMapper.batchInsert(orderList);
+        return optNum>0;
     }
 
     public PageInfo<CkProduct> queryProductList(CkProductListQueryParam ckProductListQueryParam) {

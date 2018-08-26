@@ -38,6 +38,16 @@ public class CkOrderListJson implements Serializable {
 
     private String lowNo;
 
+    private String specification;
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
     public Long getId() {
         return id;
     }

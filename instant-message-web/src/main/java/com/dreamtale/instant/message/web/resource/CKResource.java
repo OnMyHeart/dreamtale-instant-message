@@ -11,13 +11,14 @@ import com.dreamtale.instant.message.web.service.CKService;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 仓库业务
  * @author  dream
@@ -40,6 +41,18 @@ public class CKResource {
             pageResult.setRows(pageInfo.getList());
         }
         return pageResult;
+    }
+
+    @PostMapping("/order/add")
+    public ResultJson<Boolean> batchAddOrder(String orderListStr) {
+        ResultJson resultJson = new ResultJson();
+         if(StringUtils.isNotBlank(orderListStr)){
+            resultJson.setData(true);
+            resultJson.setData(ckService.batchAddOrder(orderListStr));
+        } else {
+            resultJson.setData(false);
+        }
+        return resultJson;
     }
 
     @GetMapping("/product/queryProductList")
