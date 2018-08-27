@@ -4,6 +4,8 @@
   <resultMap id="BaseResultMap" type="com.dreamtale.instant.message.api.entity.ck.pojo.CkOrder" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="salesman_no" property="salesmanNo" jdbcType="VARCHAR" />
+    <result column="low_no" property="lowNo" jdbcType="VARCHAR" />
+    <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
     <result column="product_id" property="productId" jdbcType="BIGINT" />
     <result column="count" property="count" jdbcType="BIGINT" />
     <result column="price" property="price" jdbcType="DECIMAL" />
@@ -11,7 +13,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, salesman_no, product_id, count, price, amount, create_time
+    id, salesman_no, batch_no, low_no, product_id, count, price, amount, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -24,21 +26,21 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkOrder" >
-    insert into ck_order (id, salesman_no, product_id, 
+    insert into ck_order (id, salesman_no, batch_no, low_no, product_id,
       count, price, amount, 
       create_time)
-    values (#{id,jdbcType=BIGINT}, #{salesmanNo,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{salesmanNo,jdbcType=VARCHAR},#{batchNo,jdbcType=VARCHAR},#{lowNo,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT},
       #{count,jdbcType=BIGINT}, #{price,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
       now())
   </insert>
 
   <insert id="batchInsert" parameterType="java.util.List" >
-    insert into ck_order (id, salesman_no, product_id,
+    insert into ck_order (id, salesman_no, batch_no, low_no, product_id,
       count, price, amount,
       create_time)
     values 
     <foreach collection="orderList" item="order" index="index" separator="," >
-      (#{order.id,jdbcType=BIGINT}, #{order.salesmanNo,jdbcType=VARCHAR}, #{order.productId,jdbcType=BIGINT},
+      (#{order.id,jdbcType=BIGINT}, #{order.salesmanNo,jdbcType=VARCHAR},#{order.batchNo,jdbcType=VARCHAR},#{order.lowNo,jdbcType=VARCHAR}, #{order.productId,jdbcType=BIGINT},
       #{order.count,jdbcType=BIGINT}, #{order.price,jdbcType=DECIMAL}, #{order.amount,jdbcType=DECIMAL},
       now())
     </foreach>
@@ -54,6 +56,15 @@
       <if test="salesmanNo != null" >
         salesman_no,
       </if>
+
+      <if test="batchNo != null" >
+        batch_no,
+      </if>
+
+      <if test="lowNo != null" >
+        low_no,
+      </if>
+
       <if test="productId != null" >
         product_id,
       </if>
@@ -77,6 +88,12 @@
       <if test="salesmanNo != null" >
         #{salesmanNo,jdbcType=VARCHAR},
       </if>
+      <if test="batchNo != null" >
+        #{batch_no,jdbcType=VARCHAR},
+      </if>
+      <if test="lowNo != null" >
+        #{low_,jdbcType=VARCHAR},
+      </if>
       <if test="productId != null" >
         #{productId,jdbcType=BIGINT},
       </if>
@@ -99,6 +116,12 @@
     <set >
       <if test="salesmanNo != null" >
         salesman_no = #{salesmanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null" >
+        batch_no = #{salesmanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lowNo != null" >
+        low_no = #{salesmanNo,jdbcType=VARCHAR},
       </if>
       <if test="productId != null" >
         product_id = #{productId,jdbcType=BIGINT},
@@ -130,10 +153,10 @@
   </update>
   <select id="queryCkOrderList" resultType="com.dreamtale.instant.message.api.entity.ck.json.CkOrderListJson" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkOrderListQueryParam">
     SELECT
-    co.id AS id, co.salesman_no AS salesmanNo, co.product_id as productId, co.count as count,
+    co.id AS id, co.salesman_no AS salesmanNo, co.batch_no AS batchNo, co.low_no AS lowNo, co.product_id as productId, co.count as count,
     co.price AS  price, co.amount AS  amount, co.create_time AS createTime,
     cd.id AS districtNo, cd.name AS districtName, cu.name AS salesmanName, cu.phone AS salesmanPhone,
-    cp.no AS productCode, cp.name AS productName, cp.unit AS unit, cp.batch_no AS batchNo, cp.low_no AS lowNo, cp.specification AS specification
+    cp.no AS productCode, cp.name AS productName, cp.unit AS unit, cp.specification AS specification
      FROM ck_order co
      LEFT OUTER JOIN ck_user cu ON cu.id=co.salesman_no
      LEFT OUTER JOIN ck_district cd ON cu.district_no=cd.id

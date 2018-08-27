@@ -65,6 +65,12 @@
 <!-- Peity -->
 <script>
     $(function() {
+
+        $("#price").on("blur", function () {
+            var price= $(this).val();
+            $("#price").val(price.toFixed(2));
+        });
+
         $('#exampleTableEvents').bootstrapTable({
             url: "queryProductList",
             search: false,
@@ -89,9 +95,11 @@
                 {field:"name",title:"产品名称",align: 'center', valign: 'middle',data:"name"},
                 {field:"unit",title:"单位",align: 'center', valign: 'middle',data:"unit"},
                 {field:"specification",title:"规格",align: 'center', valign: 'middle',data:"specification"},
-                {field:"price",title:"价格",align: 'center', valign: 'middle',data:"price"},
-                {field:"batchNo",title:"产品批次号",align: 'center', valign: 'middle',data:"count"},
-                {field:"lowNo",title:"产品小号",align: 'center', valign: 'middle',data:"amount"}
+                {field:"price",title:"价格",align: 'center', valign: 'middle',data:"price",
+                    formatter:function (value, row, index) {
+                        return [row.price.toFixed(2)].join("");
+                    }
+                }
             ]
         });
 
@@ -124,25 +132,13 @@
                         layer.msg("价格不能为空！");
                         return;
                     }
-                    var batchNo = $("#batchNo").val();
-                    if(batchNo==null || batchNo=="" || batchNo==undefined){
-                        layer.msg("批次号不能为空！");
-                        return;
-                    }
-                    var lowNo = $("#lowNo").val();
-                    if(lowNo==null || lowNo=="" || lowNo==undefined){
-                        layer.msg("小号不能为空！");
-                        return;
-                    }
                     var no = $("#no").val();
                     var param = {
                         no: no,
                         name: name,
                         unit: unit,
                         specification: specification,
-                        price: price,
-                        batchNo: batchNo,
-                        lowNo: lowNo
+                        price: price
                     };
                     var ajaxObj = {url: 'add',param:param,method:"POST",async:false};
                     commonJS.sendAjaxRequest(ajaxObj, function (data) {
@@ -171,49 +167,35 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">条形码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="no" name="no">
+                            <input type="text" class="form-control" id="no" name="no"  maxlength="16" placeholder="条形码是非必填项，最多16个字">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">品名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" maxlength="16" placeholder="请输入产品名称，最长16位">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">单位</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="unit" name="unit">
+                            <input type="text" class="form-control" id="unit" name="unit" maxlength="8" placeholder="请输入单位，最多8个字">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">规格</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="specification" name="specification">
+                            <input type="text" class="form-control" id="specification" name="specification" maxlength="64" placeholder="请输入规格，最多64个字">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">价格</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="price" name="price">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">批次号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="batchNo" name="batchNo">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">小号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lowNo" name="lowNo">
+                            <input type="text" class="form-control" id="price" name="price"maxlength="10" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" placeholder="请输入价格，最多两位小数点">
                         </div>
                     </div>
                 </form>

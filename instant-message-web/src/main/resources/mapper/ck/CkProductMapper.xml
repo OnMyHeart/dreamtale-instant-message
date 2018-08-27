@@ -8,11 +8,9 @@
     <result column="unit" property="unit" jdbcType="VARCHAR" />
     <result column="specification" property="specification" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
-    <result column="low_no" property="lowNo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, no, name, unit, specification, price, batch_no, low_no
+    id, no, name, unit, specification, price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -26,11 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkProduct" >
     insert into ck_product (id, no, name, 
-      unit, specification, price, 
-      batch_no, low_no)
+      unit, specification, price)
     values (#{id,jdbcType=BIGINT}, #{no,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{unit,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{batchNo,jdbcType=VARCHAR}, #{lowNo,jdbcType=VARCHAR})
+      #{unit,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkProduct" >
     insert into ck_product
@@ -53,12 +49,6 @@
       <if test="price != null" >
         price,
       </if>
-      <if test="batchNo != null" >
-        batch_no,
-      </if>
-      <if test="lowNo != null" >
-        low_no,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -78,12 +68,6 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="batchNo != null" >
-        #{batchNo,jdbcType=VARCHAR},
-      </if>
-      <if test="lowNo != null" >
-        #{lowNo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -105,12 +89,6 @@
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="batchNo != null" >
-        batch_no = #{batchNo,jdbcType=VARCHAR},
-      </if>
-      <if test="lowNo != null" >
-        low_no = #{lowNo,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -120,9 +98,7 @@
       name = #{name,jdbcType=VARCHAR},
       unit = #{unit,jdbcType=VARCHAR},
       specification = #{specification,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      batch_no = #{batchNo,jdbcType=VARCHAR},
-      low_no = #{lowNo,jdbcType=VARCHAR}
+      price = #{price,jdbcType=DECIMAL}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="queryProductList" resultMap="BaseResultMap" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkProductListQueryParam">

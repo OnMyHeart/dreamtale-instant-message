@@ -3,6 +3,7 @@ package com.dreamtale.instant.message.api.entity.ck.pojo;
 import java.math.BigDecimal;
 
 public class CkProduct {
+
     private Long id;
 
     private String no;
@@ -14,10 +15,6 @@ public class CkProduct {
     private String specification;
 
     private BigDecimal price;
-
-    private String batchNo;
-
-    private String lowNo;
 
     public Long getId() {
         return id;
@@ -67,19 +64,4 @@ public class CkProduct {
         this.price = price;
     }
 
-    public String getBatchNo() {
-        return batchNo;
-    }
-
-    public void setBatchNo(String batchNo) {
-        this.batchNo = batchNo == null ? null : batchNo.trim();
-    }
-
-    public String getLowNo() {
-        return lowNo;
-    }
-
-    public void setLowNo(String lowNo) {
-        this.lowNo = lowNo == null ? null : lowNo.trim();
-    }
 }

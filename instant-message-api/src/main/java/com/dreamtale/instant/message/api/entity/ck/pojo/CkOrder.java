@@ -16,6 +16,10 @@ public class CkOrder {
 
     private BigDecimal amount;
 
+    private String lowNo;
+
+    private String batchNo;
+
     private Date createTime;
 
     public Long getId() {
@@ -64,6 +68,22 @@ public class CkOrder {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getLowNo() {
+        return lowNo;
+    }
+
+    public void setLowNo(String lowNo) {
+        this.lowNo = lowNo;
+    }
+
+    public String getBatchNo() {
+        return batchNo;
+    }
+
+    public void setBatchNo(String batchNo) {
+        this.batchNo = batchNo;
     }
 
     public Date getCreateTime() {

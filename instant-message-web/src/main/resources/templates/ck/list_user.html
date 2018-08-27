@@ -68,6 +68,10 @@
 <script>
     $(function() {
 
+        function checkPhone(phone){
+
+        }
+
         $('#exampleTableEvents').bootstrapTable({
             url: "queryUserList",
             search: false,
@@ -163,14 +167,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">姓名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" maxlength="4" placeholder="请输入业务员姓名，最长4个字">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">电话</label>
+                        <label class="col-sm-2 control-label">手机</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="phone" name="phone">
+                            <input type="text" class="form-control" id="phone" name="phone" maxlength="11" placeholder="请输入业务员手机号" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " onblur="checkPhone(this.value)">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>

@@ -54,6 +54,10 @@
 
             $("#add_district").on("click", function () {
                 layer.prompt({title: '请输入区域名称', formType: 3}, function(pass, index){
+                    if(pass==null || pass=="" || pass==undefined){
+                        layer.msg("区域名称不能为空！");
+                        return;
+                    }
                     var ajaxObj = {url: 'add',param:{"name":pass},method:"POST",async:false};
                     commonJS.sendAjaxRequest(ajaxObj, function (data) {
                         if(data.data==true){

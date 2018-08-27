@@ -2,6 +2,10 @@ package com.dreamtale.instant.message.api.entity.ck.param;
 
 import java.math.BigDecimal;
 
+/**
+ * 下单参数
+ * @author  dream
+ */
 public class CkOrderInsertParam {
 
     private String salesmanNo;
@@ -13,6 +17,10 @@ public class CkOrderInsertParam {
     private BigDecimal price;
 
     private BigDecimal amount;
+
+    private String lowNo;
+
+    private String batchNo;
 
     public Long getProductId() {
         return productId;
@@ -52,5 +60,21 @@ public class CkOrderInsertParam {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getLowNo() {
+        return lowNo;
+    }
+
+    public void setLowNo(String lowNo) {
+        this.lowNo = lowNo;
+    }
+
+    public String getBatchNo() {
+        return batchNo;
+    }
+
+    public void setBatchNo(String batchNo) {
+        this.batchNo = batchNo;
     }
 }
