@@ -37,4 +37,9 @@ public class CKController {
         return "ck/list_district";
     }
 
+    @RequestMapping("/desktop")
+    public String desktop(ModelMap modelMap){
+        return "ck/desktop";
+    }
+
 }

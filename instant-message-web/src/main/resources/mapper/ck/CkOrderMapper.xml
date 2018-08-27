@@ -138,6 +138,6 @@
      LEFT OUTER JOIN ck_user cu ON cu.id=co.salesman_no
      LEFT OUTER JOIN ck_district cd ON cu.district_no=cd.id
      LEFT OUTER JOIN ck_product cp ON cp.id=co.product_id
-     ORDER BY create_time DESC
+     ORDER BY create_time DESC, id DESC
   </select>
 </mapper>
