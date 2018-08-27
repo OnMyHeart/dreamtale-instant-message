@@ -38,7 +38,7 @@ public class CKService {
     CkOrderMapper ckOrderMapper;
 
     public PageInfo<CkOrderListJson> queryOrderList(CkOrderListQueryParam ckOrderListQueryParam) {
-        PageInfo<CkOrderListJson> pageInfo = PageHelper.startPage(
+        PageInfo<CkOrderListJson> pageInfo = PageHelper.offsetPage(
                 ckOrderListQueryParam.getOffset(),
                 ckOrderListQueryParam.getLimit()
         ).doSelectPageInfo(()->ckOrderMapper.queryCkOrderList(ckOrderListQueryParam));
@@ -52,7 +52,7 @@ public class CKService {
     }
 
     public PageInfo<CkProduct> queryProductList(CkProductListQueryParam ckProductListQueryParam) {
-        PageInfo<CkProduct> pageInfo = PageHelper.startPage(
+        PageInfo<CkProduct> pageInfo = PageHelper.offsetPage(
                 ckProductListQueryParam.getOffset(),
                 ckProductListQueryParam.getLimit()
         ).doSelectPageInfo(()->ckProductMapper.queryProductList(ckProductListQueryParam));
@@ -60,7 +60,7 @@ public class CKService {
     }
 
     public PageInfo<CkDistrict> queryDistrictList(CkDistrictListQueryParam ckDistrictListQueryParam) {
-        PageInfo<CkDistrict> pageInfo = PageHelper.startPage(
+        PageInfo<CkDistrict> pageInfo = PageHelper.offsetPage(
                 ckDistrictListQueryParam.getOffset(),
                 ckDistrictListQueryParam.getLimit()
         ).doSelectPageInfo(()->ckDistrictMapper.queryDistrictList(ckDistrictListQueryParam));
@@ -68,7 +68,7 @@ public class CKService {
     }
 
     public PageInfo<CkUserListJson> queryUserList(CkUserListQueryParam ckUserListQueryParam) {
-        PageInfo<CkUserListJson> pageInfo = PageHelper.startPage(
+        PageInfo<CkUserListJson> pageInfo = PageHelper.offsetPage(
                 ckUserListQueryParam.getOffset(),
                 ckUserListQueryParam.getLimit()
         ).doSelectPageInfo(()->ckUserMapper.queryUserList(ckUserListQueryParam));
