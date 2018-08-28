@@ -89,6 +89,11 @@ public class CKService {
         return optNum>0;
     }
 
+    public boolean delUser(Long id){
+        int optNum = ckUserMapper.deleteByPrimaryKey(id);
+        return optNum>0;
+    }
+
     public boolean addProduct(CkProduct ckProduct){
         int optNum = ckProductMapper.insert(ckProduct);
         return optNum>0;
