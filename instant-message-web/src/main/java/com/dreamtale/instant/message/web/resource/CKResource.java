@@ -2,6 +2,7 @@ package com.dreamtale.instant.message.web.resource;
 
 import com.dreamtale.instant.message.api.common.ResultJson;
 import com.dreamtale.instant.message.api.entity.ck.json.CkOrderListJson;
+import com.dreamtale.instant.message.api.entity.ck.json.CkStatisticsJson;
 import com.dreamtale.instant.message.api.entity.ck.json.CkUserListJson;
 import com.dreamtale.instant.message.api.entity.ck.param.*;
 import com.dreamtale.instant.message.api.entity.ck.pojo.CkDistrict;
@@ -135,6 +136,20 @@ public class CKResource {
             resultJson.setData(ckService.addProduct(ckProduct));
         } catch (Exception e){
             resultJson.setData(false);
+        }
+        return resultJson;
+    }
+
+    @GetMapping("/order/queryStatisticsInfo")
+    public ResultJson<CkStatisticsJson> queryStatisticsInfo(){
+        ResultJson resultJson = new ResultJson();
+        resultJson.setCode(200);
+        try{
+            resultJson.setData(ckService.queryStatisticsInfo());
+        } catch (Exception e) {
+            resultJson.setCode(400);
+            resultJson.setMessage("查询排行榜信息异常");
+            resultJson.setData(null);
         }
         return resultJson;
     }

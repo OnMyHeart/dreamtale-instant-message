@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
-
+<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>本月销售总额 </span>
-                        <h2 class="font-bold">&yen; 4,232</h2>
+                        <h3 class="font-bold" >&yen; <span th:text="${statisticsInfo.amountOfMonth}">0.00</span></h3>
                     </div>
                 </div>
             </div>
@@ -34,11 +34,11 @@
             <div class="widget style1 navy-bg">
                 <div class="row">
                     <div class="col-xs-4">
-                        <i class="fa fa-cloud fa-5x"></i>
+                        <i class="fa fa-trophy fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 本月总销量 </span>
-                        <h2 class="font-bold">100000</h2>
+                        <h2 class="font-bold"><span th:text="${statisticsInfo.countOfMonth}">0</span></h2>
                     </div>
                 </div>
             </div>
@@ -47,12 +47,12 @@
             <div class="widget style1 lazur-bg">
                 <div class="row">
                     <div class="col-xs-4">
-                        <i class="fa fa-envelope-o fa-5x"></i>
+                        <i class="fa fa-trophy fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 本月明星产品 </span>
-                        <h3>白板笔</h3>
-                        <small>销量：10000</small>
+                        <h4 th:text="${statisticsInfo.starsProductOfMonth.productName}">xxxxxx</h4>
+                        <small>销量：<span th:text="${statisticsInfo.starsProductOfMonth.productCount}">0</span></small>
                     </div>
                 </div>
             </div>
@@ -61,12 +61,12 @@
             <div class="widget style1 yellow-bg">
                 <div class="row">
                     <div class="col-xs-4">
-                        <i class="fa fa-music fa-5x"></i>
+                        <i class="fa fa-trophy fa-5x"></i>
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 本月明星业务员 </span>
-                        <h3>张三</h3>
-                        <small>￥1000.00</small>
+                        <h3 th:text="${statisticsInfo.starsSalesmanOfMonth.salesmanName}">xxx</h3>
+                        <small>&yen; <span th:text="${statisticsInfo.starsSalesmanOfMonth.amount}">0.00</span></small>
                     </div>
                 </div>
             </div>
@@ -77,10 +77,7 @@
             <div class="widget navy-bg no-padding">
                 <div class="p-m">
                     <h1 class="m-xs">&yen; 1540</h1>
-
-                    <h3 class="font-bold no-margins">
-                        年收入
-                    </h3>
+                    <h3 class="font-bold no-margins">Carl 标价牌系列系列系列系列系列</h3>
                     <small>项目年收入</small>
                 </div>
                 <div class="flot-chart">

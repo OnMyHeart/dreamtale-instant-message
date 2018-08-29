@@ -71,7 +71,7 @@ dependencies {
 	compile 'tk.mybatis:mapper:3.3.9'
 	compile ("mysql:mysql-connector-java:8.0.11")
 	compile 'org.jfree:jfreechart:1.5.0'
-//	compile "com.alibaba:druid-spring-boot-starter:1.1.0"
+//	compile "com.alibaba:druid-spring-boot-starter:1.1.10"
 //	compile 'com.zaxxer:HikariCP:2.7.8'
 
 	compile "com.google.guava:guava:19.0"

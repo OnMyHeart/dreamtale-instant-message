@@ -1,5 +1,7 @@
 package com.dreamtale.instant.message.web.controller;
 
+import com.dreamtale.instant.message.web.service.CKService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/ck")
 public class CKController {
+
+    @Autowired
+    CKService ckService;
 
     @RequestMapping("/index")
     public String index(ModelMap modelMap){
@@ -39,6 +44,8 @@ public class CKController {
 
     @RequestMapping("/desktop")
     public String desktop(ModelMap modelMap){
+        //统计信息
+        modelMap.put("statisticsInfo",ckService.queryStatisticsInfo());
         return "ck/desktop";
     }
 
