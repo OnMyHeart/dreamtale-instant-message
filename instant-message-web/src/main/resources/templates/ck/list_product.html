@@ -99,7 +99,7 @@
                 },
                 {field:"opt",title:"操作",align: 'center', valign: 'middle',data:"opt",
                     formatter:function (value, row, index) {
-                        return ['<button type="button" class="delProduct btn btn-danger" userId="'+row.id+'"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> 删除</button>'].join("");
+                        return ['<button type="button" class="delProduct btn btn-danger btn-xs" userId="'+row.id+'"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> 删除</button>'].join("");
                     },
                     events: {"click .delProduct":function (e, value, row, index) {
                         layer.open({

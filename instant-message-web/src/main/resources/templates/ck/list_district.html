@@ -51,7 +51,7 @@
                     {field:"name",title:"区域名称",align: 'center', valign: 'middle',data:"name"},
                     {field:"opt",title:"操作",align: 'center', valign: 'middle',data:"opt",
                         formatter:function (value, row, index) {
-                            return ['<button type="button" class="delDistrict btn btn-danger"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> 删除</button>'].join("");
+                            return ['<button type="button" class="delDistrict btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> 删除</button>'].join("");
                         },
                         events: {"click .delDistrict":function (e, value, row, index) {
                             layer.open({

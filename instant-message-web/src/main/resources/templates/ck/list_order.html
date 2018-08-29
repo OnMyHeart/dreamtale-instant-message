@@ -104,7 +104,7 @@
                 {field:"districtName",title:"区域",align: 'center', valign: 'middle',data:"districtName"},
                 {field:"opt",title:"操作",align: 'center', valign: 'middle',data:"opt",
                     formatter:function (value, row, index) {
-                        return ['<button type="button" class="delOrder btn btn-danger"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></button>'].join("");
+                        return ['<button type="button" class="delOrder btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></button>'].join("");
                     },
                     events: {"click .delOrder":function (e, value, row, index) {
                         layer.open({
