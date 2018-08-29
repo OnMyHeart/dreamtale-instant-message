@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.dreamtale.instant.message.api.entity.ck.json.*;
 import com.dreamtale.instant.message.api.entity.ck.param.*;
 import com.dreamtale.instant.message.api.entity.ck.pojo.CkDistrict;
+import com.dreamtale.instant.message.api.entity.ck.pojo.CkOrder;
 import com.dreamtale.instant.message.api.entity.ck.pojo.CkProduct;
 import com.dreamtale.instant.message.api.entity.ck.pojo.CkUser;
 import com.dreamtale.instant.message.api.mapper.ck.CkDistrictMapper;
@@ -19,7 +20,6 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 仓库业务处理
@@ -54,6 +54,14 @@ public class CKService {
         return optNum>0;
     }
 
+    public boolean delOrder(Long id){
+        CkOrder ckOrder = new CkOrder();
+        ckOrder.setStatus(2);
+        ckOrder.setId(id);
+        int optNum = ckOrderMapper.updateByPrimaryKeySelective(ckOrder);
+        return optNum>0;
+    }
+
     public PageInfo<CkProduct> queryProductList(CkProductListQueryParam ckProductListQueryParam) {
         PageInfo<CkProduct> pageInfo = PageHelper.offsetPage(
                 ckProductListQueryParam.getOffset(),
@@ -83,6 +91,14 @@ public class CKService {
         return optNum>0;
     }
 
+    public Boolean delDistrict(Long id){
+        CkDistrict ckDistrict = new CkDistrict();
+        ckDistrict.setId(id);
+        ckDistrict.setStatus(2);
+        int optNum = ckDistrictMapper.updateByPrimaryKeySelective(ckDistrict);
+        return optNum>0;
+    }
+
     public boolean addUser(CkUserInsertParam ckUserInsertParam){
         CkUser ckUser = new CkUser();
         ckUser.setName(ckUserInsertParam.getName());
@@ -93,12 +109,23 @@ public class CKService {
     }
 
     public boolean delUser(Long id){
-        int optNum = ckUserMapper.deleteByPrimaryKey(id);
+        CkUser ckUser = new CkUser();
+        ckUser.setId(id);
+        ckUser.setStatus(2);
+        int optNum = ckUserMapper.updateByPrimaryKeySelective(ckUser);
         return optNum>0;
     }
 
     public boolean addProduct(CkProduct ckProduct){
         int optNum = ckProductMapper.insert(ckProduct);
+        return optNum>0;
+    }
+
+    public boolean delProduct(Long id){
+        CkProduct ckProduct = new CkProduct();
+        ckProduct.setId(id);
+        ckProduct.setStatus(2);
+        int optNum = ckProductMapper.updateByPrimaryKeySelective(ckProduct);
         return optNum>0;
     }
 

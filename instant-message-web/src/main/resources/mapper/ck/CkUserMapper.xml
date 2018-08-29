@@ -6,9 +6,10 @@
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="district_no" property="districtNo" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, phone, name, district_no
+    id, phone, name, district_no, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkUser" >
     insert into ck_user (id, phone, name, 
-      district_no)
+      district_no, status)
     values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{districtNo,jdbcType=BIGINT})
+      #{districtNo,jdbcType=BIGINT},1)
   </insert>
   <insert id="insertSelective" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkUser" >
     insert into ck_user
@@ -41,6 +42,9 @@
       <if test="districtNo != null" >
         district_no,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -54,6 +58,9 @@
       </if>
       <if test="districtNo != null" >
         #{districtNo,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="districtNo != null" >
         district_no = #{districtNo,jdbcType=BIGINT},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -76,13 +86,15 @@
     update ck_user
     set phone = #{phone,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      district_no = #{districtNo,jdbcType=BIGINT}
+      district_no = #{districtNo,jdbcType=BIGINT},
+      status = #{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="queryUserList" resultType="com.dreamtale.instant.message.api.entity.ck.json.CkUserListJson" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkUserListQueryParam" >
     SELECT cu.id AS id, cu.name AS name, cu.phone AS phone, cu.district_no AS districtNo, cd.name AS districtName
     FROM ck_user cu
     LEFT OUTER JOIN ck_district cd ON cd.id=cu.district_no
+    WHERE cu.status = 1
     ORDER BY cu.id DESC
   </select>
 

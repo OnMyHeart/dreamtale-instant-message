@@ -8,9 +8,10 @@
     <result column="unit" property="unit" jdbcType="VARCHAR" />
     <result column="specification" property="specification" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, no, name, unit, specification, price
+    id, no, name, unit, specification, price, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -24,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkProduct" >
     insert into ck_product (id, no, name, 
-      unit, specification, price)
+      unit, specification, price, status)
     values (#{id,jdbcType=BIGINT}, #{no,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{unit,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL})
+      #{unit,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},1)
   </insert>
   <insert id="insertSelective" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkProduct" >
     insert into ck_product
@@ -49,6 +50,9 @@
       <if test="price != null" >
         price,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -68,6 +72,9 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -89,6 +96,9 @@
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -98,13 +108,15 @@
       name = #{name,jdbcType=VARCHAR},
       unit = #{unit,jdbcType=VARCHAR},
       specification = #{specification,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL}
+      price = #{price,jdbcType=DECIMAL},
+      status = #{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="queryProductList" resultMap="BaseResultMap" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkProductListQueryParam">
     SELECT
     <include refid="Base_Column_List" />
     FROM ck_product
+    WHERE status = 1
     ORDER BY id DESC
   </select>
 </mapper>

@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>本月销售总额 </span>
-                        <h3 class="font-bold" >&yen; <span th:text="${statisticsInfo.amountOfMonth}">0.00</span></h3>
+                        <h2 class="font-bold" >&yen; <span th:text="${statisticsInfo.amountOfMonth}">0.00</span></h2>
                     </div>
                 </div>
             </div>
@@ -121,6 +121,7 @@
                     <ul class="todo-list m-t small-list">
                         <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesMoneyOfMonth}">
                             <li>
+                                <span th:text="${ckStat.count}">1 </span>
                                 <span class="m-l-xs" th:text="${ck.salesmanName}">xxxx</span>
                                 <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.amount}">0.00</span></small>
                             </li>
@@ -135,6 +136,7 @@
                     <h4>月度产品销量排行榜</h4>
                     <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesRankingOfMonth}">
                         <li>
+                            <span th:text="${ckStat.count}">1 </span>
                             <span class="m-l-xs" th:text="${ck.productName}">xxxx</span>
                             <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.productCount}">0.00</span></small>
                         </li>
@@ -148,6 +150,7 @@
                     <h4>年度销售额排行榜</h4>
                     <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesMoneyOfYear}">
                         <li>
+                            <span th:text="${ckStat.count}">1 </span>
                             <span class="m-l-xs" th:text="${ck.salesmanName}">xxxx</span>
                             <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.amount}">0.00</span></small>
                         </li>
@@ -161,6 +164,7 @@
                     <h4>年度产品销量排行榜</h4>
                     <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesRankingOfYear}">
                         <li>
+                            <span th:text="${ckStat.count}">1 </span>
                             <span class="m-l-xs" th:text="${ck.productName}">xxxx</span>
                             <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.productCount}">0.00</span></small>
                         </li>

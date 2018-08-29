@@ -4,9 +4,10 @@
   <resultMap id="BaseResultMap" type="com.dreamtale.instant.message.api.entity.ck.pojo.CkDistrict" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name
+    id, name, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -19,8 +20,8 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkDistrict" >
-    insert into ck_district (id, name)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR})
+    insert into ck_district (id, name, status)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},1)
   </insert>
   <insert id="insertSelective" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkDistrict" >
     insert into ck_district
@@ -31,6 +32,9 @@
       <if test="name != null" >
         name,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -38,6 +42,9 @@
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -47,20 +54,26 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkDistrict" >
     update ck_district
-    set name = #{name,jdbcType=VARCHAR}
+    set name = #{name,jdbcType=VARCHAR},
+    status = #{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <insert id="addDistrict" parameterType="java.lang.String">
-    INSERT INTO ck_district (name) VALUES (#{name,jdbcType=VARCHAR})
+    INSERT INTO ck_district (name, status) VALUES (#{name,jdbcType=VARCHAR}, 1)
   </insert>
   <select id="queryDistrictList" resultMap="BaseResultMap" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkDistrictListQueryParam">
     SELECT
     <include refid="Base_Column_List"  />
-    FROM ck_district ORDER BY id DESC
+    FROM ck_district
+    WHERE status = 1
+    ORDER BY id DESC
   </select>
 </mapper>

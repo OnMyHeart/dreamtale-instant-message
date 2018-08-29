@@ -1,6 +1,7 @@
 package com.dreamtale.instant.message.api.entity.ck.pojo;
 
 public class CkUser {
+
     private Long id;
 
     private String phone;
@@ -8,6 +9,8 @@ public class CkUser {
     private String name;
 
     private Long districtNo;
+
+    private Integer status;
 
     public Long getId() {
         return id;
@@ -39,5 +42,13 @@ public class CkUser {
 
     public void setDistrictNo(Long districtNo) {
         this.districtNo = districtNo;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

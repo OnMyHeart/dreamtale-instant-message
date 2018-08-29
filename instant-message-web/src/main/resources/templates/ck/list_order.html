@@ -101,7 +101,34 @@
                 },
                 {field:"createTime",title:"出货日期",align: 'center', valign: 'middle',data:"createTime"},
                 {field:"salesmanName",title:"业务员",align: 'center', valign: 'middle',data:"salesmanName"},
-                {field:"districtName",title:"区域",align: 'center', valign: 'middle',data:"districtName"}
+                {field:"districtName",title:"区域",align: 'center', valign: 'middle',data:"districtName"},
+                {field:"opt",title:"操作",align: 'center', valign: 'middle',data:"opt",
+                    formatter:function (value, row, index) {
+                        return ['<button type="button" class="delOrder btn btn-danger"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></button>'].join("");
+                    },
+                    events: {"click .delOrder":function (e, value, row, index) {
+                        layer.open({
+                            title:"删除前的确认",
+                            content:"确定删除<font color='red'>"+row.productName+"</font>（<font color='red'>"+row.id+"</font>）？",
+                            btn:["确定","取消"],
+                            btn1:function (index) {
+                                //开始执行删除操作
+                                var ajaxObj = {url: 'del',param:{"id":row.id},method:"GET",async:false};
+                                commonJS.sendAjaxRequest(ajaxObj, function (value) {
+                                    if(value.data==true){
+                                        layer.alert("删除成功！");
+                                    } else {
+                                        layer.alert("删除<font color='red'>"+row.name+"</font>（<font color='red'>"+row.id+"</font>）失败！");
+                                    }
+                                });
+                                window.location.reload();
+                            },
+                            btn2:function (index) {
+                                layer.close(index);
+                            }
+                        });
+                    }}
+                }
             ]
         });
 

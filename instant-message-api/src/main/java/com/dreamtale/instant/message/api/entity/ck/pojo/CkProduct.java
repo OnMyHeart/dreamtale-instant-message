@@ -16,6 +16,8 @@ public class CkProduct {
 
     private BigDecimal price;
 
+    private Integer status;
+
     public Long getId() {
         return id;
     }
@@ -64,4 +66,11 @@ public class CkProduct {
         this.price = price;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

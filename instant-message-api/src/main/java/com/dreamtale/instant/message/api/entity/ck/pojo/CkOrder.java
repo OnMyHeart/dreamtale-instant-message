@@ -22,6 +22,8 @@ public class CkOrder {
 
     private Date createTime;
 
+    private Integer status;
+
     public Long getId() {
         return id;
     }
@@ -92,5 +94,13 @@ public class CkOrder {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

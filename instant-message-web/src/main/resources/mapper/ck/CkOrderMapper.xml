@@ -11,9 +11,10 @@
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, salesman_no, batch_no, low_no, product_id, count, price, amount, create_time
+    id, salesman_no, batch_no, low_no, product_id, count, price, amount, create_time, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -28,7 +29,7 @@
   <insert id="insert" parameterType="com.dreamtale.instant.message.api.entity.ck.pojo.CkOrder" >
     insert into ck_order (id, salesman_no, batch_no, low_no, product_id,
       count, price, amount, 
-      create_time)
+      create_time, status)
     values (#{id,jdbcType=BIGINT}, #{salesmanNo,jdbcType=VARCHAR},#{batchNo,jdbcType=VARCHAR},#{lowNo,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT},
       #{count,jdbcType=BIGINT}, #{price,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
       now())
@@ -37,12 +38,12 @@
   <insert id="batchInsert" parameterType="java.util.List" >
     insert into ck_order (id, salesman_no, batch_no, low_no, product_id,
       count, price, amount,
-      create_time)
+      create_time, status)
     values 
     <foreach collection="orderList" item="order" index="index" separator="," >
       (#{order.id,jdbcType=BIGINT}, #{order.salesmanNo,jdbcType=VARCHAR},#{order.batchNo,jdbcType=VARCHAR},#{order.lowNo,jdbcType=VARCHAR}, #{order.productId,jdbcType=BIGINT},
       #{order.count,jdbcType=BIGINT}, #{order.price,jdbcType=DECIMAL}, #{order.amount,jdbcType=DECIMAL},
-      now())
+      now(),1)
     </foreach>
 
   </insert>
@@ -80,6 +81,9 @@
       <if test="createTime != null" >
         create_time,
       </if>
+      <if test="status != null" >
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -108,6 +112,9 @@
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -138,6 +145,9 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -148,7 +158,8 @@
       count = #{count,jdbcType=BIGINT},
       price = #{price,jdbcType=DECIMAL},
       amount = #{amount,jdbcType=DECIMAL},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status=#{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="queryCkOrderList" resultType="com.dreamtale.instant.message.api.entity.ck.json.CkOrderListJson" parameterType="com.dreamtale.instant.message.api.entity.ck.param.CkOrderListQueryParam">
@@ -161,6 +172,7 @@
      LEFT OUTER JOIN ck_user cu ON cu.id=co.salesman_no
      LEFT OUTER JOIN ck_district cd ON cu.district_no=cd.id
      LEFT OUTER JOIN ck_product cp ON cp.id=co.product_id
+     WHERE co.status = 1
      ORDER BY create_time DESC, id DESC
   </select>
   <!-- 根据日期时间段统业务员的计销售额排行 -->
@@ -174,6 +186,7 @@
     FROM
       ( SELECT ck.salesman_no, SUM( ck.amount ) AS amount, SUM( ck.count ) AS count FROM ck_order ck
       <where>
+        ck.status = 1
         <if test="startDate!=null">
           AND ck.create_time <![CDATA[ >= ]]> #{startDate,jdbcType=TIMESTAMP}
         </if>
@@ -183,7 +196,7 @@
       </where>
       GROUP BY ck.salesman_no ) ca
       LEFT OUTER JOIN ck_user cu ON cu.id = ca.salesman_no
-    ORDER BY
+      ORDER BY
       ca.amount DESC,
       ca.count DESC
   </select>
@@ -196,6 +209,7 @@
     FROM
       ( SELECT co.product_id, SUM( co.count ) AS count FROM ck_order co
       <where>
+        co.status = 1
         <if test="startDate!=null">
           AND co.create_time <![CDATA[ >= ]]> #{startDate,jdbcType=TIMESTAMP}
         </if>
@@ -204,7 +218,7 @@
         </if>
       </where>
       GROUP BY co.product_id ) cc
-      LEFT OUTER JOIN ck_product cp ON cp.id = cc.product_id
+    LEFT OUTER JOIN ck_product cp ON cp.id = cc.product_id
     ORDER BY
 	  cc.count DESC,
 	  cc.product_id ASC

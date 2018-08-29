@@ -5,6 +5,8 @@ public class CkDistrict {
 
     private String name;
 
+    private Integer status;
+
     public Long getId() {
         return id;
     }
@@ -19,5 +21,13 @@ public class CkDistrict {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

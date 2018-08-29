@@ -103,6 +103,22 @@ public class CKResource {
         return resultJson;
     }
 
+    @GetMapping("/district/del")
+    public ResultJson<Boolean> delDistrict(Long id) {
+        ResultJson resultJson = new ResultJson();
+        if(id==null){
+            resultJson.setData(false);
+        } else {
+            try {
+                resultJson.setData(ckService.delDistrict(id));
+            } catch (Exception e){
+                resultJson.setData(false);
+            }
+        }
+        return resultJson;
+    }
+
+
     @PostMapping("/user/add")
     public ResultJson<Boolean> addUser(CkUserInsertParam ckUserInsertParam) {
         ResultJson resultJson = new ResultJson();
@@ -135,7 +151,38 @@ public class CKResource {
         try {
             resultJson.setData(ckService.addProduct(ckProduct));
         } catch (Exception e){
+            e.printStackTrace();
             resultJson.setData(false);
+        }
+        return resultJson;
+    }
+
+    @GetMapping("/product/del")
+    public ResultJson<Boolean> delProduct(Long id) {
+        ResultJson resultJson = new ResultJson();
+        if(id==null){
+            resultJson.setData(false);
+        } else {
+            try {
+                resultJson.setData(ckService.delProduct(id));
+            } catch (Exception e){
+                resultJson.setData(false);
+            }
+        }
+        return resultJson;
+    }
+
+    @GetMapping("/order/del")
+    public ResultJson<Boolean> delOrder(Long id) {
+        ResultJson resultJson = new ResultJson();
+        if(id==null){
+            resultJson.setData(false);
+        } else {
+            try {
+                resultJson.setData(ckService.delOrder(id));
+            } catch (Exception e){
+                resultJson.setData(false);
+            }
         }
         return resultJson;
     }
@@ -153,5 +200,7 @@ public class CKResource {
         }
         return resultJson;
     }
+
+
 
 }
