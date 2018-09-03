@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span>本月销售总额 </span>
-                        <h2 class="font-bold" >&yen; <span th:text="${statisticsInfo.amountOfMonth}">0.00</span></h2>
+                        <h2 class="font-bold" ><i class="glyphicon glyphicon-yen"></i> <span th:text="${statisticsInfo.amountOfMonth}">0.00</span></h2>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 本月明星产品 </span>
-                        <h4 th:text="${statisticsInfo.starsProductOfMonth.productName}">xxxxxx</h4>
+                        <h4 th:text="${statisticsInfo.starsProductOfMonth.productName}">虚位以待</h4>
                         <small>销量：<span th:text="${statisticsInfo.starsProductOfMonth.productCount}">0</span></small>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                     </div>
                     <div class="col-xs-8 text-right">
                         <span> 本月明星业务员 </span>
-                        <h3 th:text="${statisticsInfo.starsSalesmanOfMonth.salesmanName}">xxx</h3>
-                        <small>&yen; <span th:text="${statisticsInfo.starsSalesmanOfMonth.amount}">0.00</span></small>
+                        <h3 th:text="${statisticsInfo.starsSalesmanOfMonth.salesmanName}">虚位以待</h3>
+                        <small><i class="glyphicon glyphicon-yen"></i> <span th:text="${statisticsInfo.starsSalesmanOfMonth.amount}">0.00</span></small>
                     </div>
                 </div>
             </div>
@@ -122,8 +122,8 @@
                         <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesMoneyOfMonth}">
                             <li>
                                 <span th:text="${ckStat.count}">1 </span>
-                                <span class="m-l-xs" th:text="${ck.salesmanName}">xxxx</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.amount}">0.00</span></small>
+                                <span class="m-l-xs" th:text="${ck.salesmanName}">虚位以待</span>
+                                <small class="label label-primary"><i class="glyphicon glyphicon-yen"></i> <span th:text="${ck.amount}">0.00</span></small>
                             </li>
                         </ul>
                     </ul>
@@ -137,8 +137,8 @@
                     <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesRankingOfMonth}">
                         <li>
                             <span th:text="${ckStat.count}">1 </span>
-                            <span class="m-l-xs" th:text="${ck.productName}">xxxx</span>
-                            <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.productCount}">0.00</span></small>
+                            <span class="m-l-xs" th:text="${ck.productName}">虚位以待</span>
+                            <small class="label label-primary"><i class="glyphicon glyphicon-signal"></i> <span th:text="${ck.productCount}">0.00</span></small>
                         </li>
                     </ul>
                 </div>
@@ -151,8 +151,8 @@
                     <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesMoneyOfYear}">
                         <li>
                             <span th:text="${ckStat.count}">1 </span>
-                            <span class="m-l-xs" th:text="${ck.salesmanName}">xxxx</span>
-                            <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.amount}">0.00</span></small>
+                            <span class="m-l-xs" th:text="${ck.salesmanName}">虚位以待</span>
+                            <small class="label label-primary"><i class="glyphicon glyphicon-yen"></i> <span th:text="${ck.amount}">0.00</span></small>
                         </li>
                     </ul>
                 </div>
@@ -165,8 +165,8 @@
                     <ul class="todo-list m-t small-list" th:each="ck, ckStat : ${statisticsInfo.salesRankingOfYear}">
                         <li>
                             <span th:text="${ckStat.count}">1 </span>
-                            <span class="m-l-xs" th:text="${ck.productName}">xxxx</span>
-                            <small class="label label-primary"><i class="fa fa-clock-o"></i> ￥<span th:text="${ck.productCount}">0.00</span></small>
+                            <span class="m-l-xs" th:text="${ck.productName}">虚位以待</span>
+                            <small class="label label-primary"><i class="glyphicon glyphicon-signal"></i> <span th:text="${ck.productCount}">0.00</span></small>
                         </li>
                     </ul>
                 </div>
