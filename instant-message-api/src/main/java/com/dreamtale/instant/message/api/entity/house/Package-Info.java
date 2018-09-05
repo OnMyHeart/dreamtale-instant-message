@@ -1,0 +1,1 @@
+package com.dreamtale.instant.message.api.entity.house;

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dreamtale.instant.message.api.mapper.user.BaseUserMapper" >
+  <resultMap id="BaseResultMap" type="com.dreamtale.instant.message.api.entity.user.pojo.BaseUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_nick_name" property="userNickName" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="real_name_check_status" property="realNameCheckStatus" jdbcType="INTEGER" />
+    <result column="email_check_status" property="emailCheckStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_name, user_password, user_nick_name, open_id, mobile, email, status,
+    real_name_check_status, email_check_status, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from base_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from base_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dreamtale.instant.message.api.entity.user.pojo.BaseUser" >
+    insert into base_user (id, user_id, user_name,
+    user_password, user_nick_name, open_id,
+    mobile, email, status,
+    real_name_check_status, email_check_status,
+    create_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+    #{userPassword,jdbcType=VARCHAR}, #{userNickName,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR},
+    #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+    #{realNameCheckStatus,jdbcType=INTEGER}, #{emailCheckStatus,jdbcType=INTEGER},
+    #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamtale.instant.message.api.entity.user.pojo.BaseUser" >
+    insert into base_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userNickName != null" >
+        user_nick_name,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="realNameCheckStatus != null" >
+        real_name_check_status,
+      </if>
+      <if test="emailCheckStatus != null" >
+        email_check_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null" >
+        #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="realNameCheckStatus != null" >
+        #{realNameCheckStatus,jdbcType=INTEGER},
+      </if>
+      <if test="emailCheckStatus != null" >
+        #{emailCheckStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamtale.instant.message.api.entity.user.pojo.BaseUser" >
+    update base_user
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null" >
+        user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="realNameCheckStatus != null" >
+        real_name_check_status = #{realNameCheckStatus,jdbcType=INTEGER},
+      </if>
+      <if test="emailCheckStatus != null" >
+        email_check_status = #{emailCheckStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamtale.instant.message.api.entity.user.pojo.BaseUser" >
+    update base_user
+    set user_id = #{userId,jdbcType=VARCHAR},
+    user_name = #{userName,jdbcType=VARCHAR},
+    user_password = #{userPassword,jdbcType=VARCHAR},
+    user_nick_name = #{userNickName,jdbcType=VARCHAR},
+    open_id = #{openId,jdbcType=VARCHAR},
+    mobile = #{mobile,jdbcType=VARCHAR},
+    email = #{email,jdbcType=VARCHAR},
+    status = #{status,jdbcType=INTEGER},
+    real_name_check_status = #{realNameCheckStatus,jdbcType=INTEGER},
+    email_check_status = #{emailCheckStatus,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="checkUserPassword" parameterType="com.dreamtale.instant.message.api.entity.user.param.UserLoginParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM base_user WHERE user_name=#{userName, jdbcType=VARCHAR} AND user_password = #{userPassword,jdbcType=VARCHAR} limit 1
+  </select>
+</mapper>

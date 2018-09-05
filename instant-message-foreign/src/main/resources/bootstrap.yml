@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: bc-instant-message-web
+  http:
+    encoding: { charset: UTF-8, enable: true, force: true }
+#  cloud:
+#     config:
+#       #配置文件名称，必填，默认application，不需要修改
+#       name: application
+#       #当前项目需要引用的公共配置，最后一个{spring.application.name}不可缺失
+#       profile: eureka-service,automini-common,redis-cluster-automini,rabbitmq-automini,${spring.application.name}
+#       #当前配置环境，默认dev，不可修改。环境切换通过不同环境的服务启动脚本实现。
+#       label: dev
+#       #配置中心URL，不可修改。已经通过各个环境的DNS解析，各个环境都可以访问。
+#       uri: http://config.org.jyall.com
+
+info:
+  component: bc-instant-message-web
