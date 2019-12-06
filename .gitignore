@@ -3,7 +3,6 @@ logs/
 build/
 .class
 /.gradle/*
-/dreamtale-instant-message.iml
 .settings/
 .git/
 .gradle/
@@ -11,3 +10,10 @@ build/
 .project
 gradlew
 gradlew.bat
+*.iml
+target/
+.classpath
+*.log
+*.gz
+.DS_Store
+/gradle

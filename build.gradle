@@ -1,19 +1,94 @@
-subprojects {
-    configurations {
-        compile.exclude module: "spring-boot-starter-tomcat"
-    }
+// 编译当前脚本所需要的工具及插件
+// 统一配置 所有子项目都继承
+buildscript {
 
-    apply plugin: 'java'
-    apply plugin: 'idea'
+    ext {
+        springBootVersion = '2.2.1.RELEASE'
+        springCloudVersion = 'Hoxton.RELEASE'
+    }
 
     repositories {
-        mavenCentral()
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+
+        maven {
+            credentials {
+                username '7q2MFU'
+                password 'jow5BzG0CG'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/79451-release-z31u8t/'
+        }
+        maven {
+            credentials {
+                username '7q2MFU'
+                password 'jow5BzG0CG'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/79451-snapshot-UJlt8r/'
+        }
     }
 
-    version = '1.0'
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+
+}
+
+// 所有子项目都继承此配置
+allprojects {
+    // 引用插件
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: "eclipse"
+    apply plugin: "io.spring.dependency-management"
+
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+
+        maven {
+            credentials {
+                username '7q2MFU'
+                password 'jow5BzG0CG'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/79451-release-z31u8t/'
+        }
+        maven {
+            credentials {
+                username '7q2MFU'
+                password 'jow5BzG0CG'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/79451-snapshot-UJlt8r/'
+        }
+    }
+
+    // 统一引用
+    dependencies {
+        implementation 'org.apache.commons:commons-lang3:3.9'
+        implementation 'com.alibaba:fastjson:1.2.58'
+        implementation 'com.google.guava:guava:25.0-jre'
+        //lombok 自动生成 set get
+        implementation 'org.projectlombok:lombok:1.18.8'
+        annotationProcessor "org.projectlombok:lombok:1.18.8"
+    }
+
+    configurations {
+        implementation {
+            exclude module: "spring-boot-starter-tomcat"
+        }
+    }
 
     jar {
         manifest.attributes provider: 'dreamtale company'
     }
+
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    group = "com.dreamtale"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
 }

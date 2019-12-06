@@ -1,0 +1,7 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: instant-message-service
+  http:
+    encoding: {charset: utf-8, force: true, enabled: true}
